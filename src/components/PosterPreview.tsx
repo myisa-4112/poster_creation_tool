@@ -32,7 +32,7 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
     <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
       <h3 className="text-xl font-bold text-white mb-4">Live Preview</h3>
       
-      <div className="bg-white rounded-lg overflow-hidden shadow-2xl max-w-md mx-auto">
+      <div id="poster-content" className="bg-white rounded-lg overflow-hidden shadow-2xl max-w-md mx-auto">
         {/* Template 1 - Bank Auction Properties (List Style) */}
         {template.id === 1 && (
           <div className="relative">
@@ -173,80 +173,80 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
           </div>
         )}
 
-        {/* Template 3 - Modern Gradient Design */}
+        {/* Template 3 - Clean Professional Design */}
         {template.id === 3 && (
-          <div className="relative bg-gradient-to-br from-blue-900 via-purple-900 to-red-900">
+          <div className="relative bg-white">
             {/* Header */}
-            <div className="relative p-4 text-white">
-              <div className="flex items-center justify-between mb-4">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4">
+              <div className="flex items-center justify-between">
                 <img src="/logo.png" alt="Mars Logo" className="h-12 w-12" />
-                <div className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold">
-                  PREMIUM PROPERTY
-                </div>
-              </div>
-              
-              <div className="text-center">
-                <h1 className="text-2xl font-bold mb-2">{data.title}</h1>
-                <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-2 rounded-lg font-bold">
-                  {data.type}
+                <div className="text-right">
+                  <div className="text-sm font-medium">PREMIUM PROPERTY</div>
+                  <div className="text-xs opacity-90">AUCTION SALE</div>
                 </div>
               </div>
             </div>
 
-            {/* Property Image with Overlay */}
-            <div className="relative h-48 overflow-hidden">
+            {/* Property Image - Full width, clear display */}
+            <div className="h-56 bg-gray-100 overflow-hidden">
               <img 
                 src={image || template.preview} 
                 alt="Property"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-              
-              {/* Price Overlay */}
-              <div className="absolute bottom-4 left-4 right-4">
-                <div className="bg-white/90 backdrop-blur-sm p-3 rounded-lg text-center">
-                  <div className="text-sm text-gray-600">STARTING PRICE</div>
-                  <div className="text-xl font-bold text-red-600">{data.price}</div>
-                </div>
-              </div>
             </div>
 
-            {/* Content Section */}
-            <div className="p-4 text-white space-y-4">
-              {/* Location */}
-              <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg">
-                <div className="text-sm opacity-80">LOCATION</div>
-                <div className="font-bold">{data.location}</div>
+            {/* Main Content */}
+            <div className="p-4 space-y-4">
+              {/* Title Section */}
+              <div className="text-center border-b border-gray-200 pb-3">
+                <h1 className="text-xl font-bold text-gray-800 mb-1">{data.title}</h1>
+                <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium inline-block">
+                  {data.type}
+                </div>
+              </div>
+
+              {/* Price Highlight */}
+              <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-lg text-center">
+                <div className="text-sm opacity-90">STARTING PRICE</div>
+                <div className="text-2xl font-bold">{data.price}</div>
+              </div>
+
+              {/* Property Details Grid */}
+              <div className="grid grid-cols-2 gap-3">
+                {/* Location */}
+                <div className="bg-gray-50 p-3 rounded-lg">
+                  <div className="text-xs text-gray-600 uppercase tracking-wide">Location</div>
+                  <div className="text-sm font-medium text-gray-800 mt-1">{data.location}</div>
+                </div>
+
+                {/* Auction Date */}
+                <div className="bg-red-50 p-3 rounded-lg">
+                  <div className="text-xs text-red-600 uppercase tracking-wide">Auction Date</div>
+                  <div className="text-sm font-bold text-red-700 mt-1">{data.auctionDate}</div>
+                </div>
               </div>
 
               {/* Features */}
-              <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg">
-                <div className="text-sm opacity-80 mb-2">PROPERTY FEATURES</div>
-                <div className="space-y-1 text-sm">
-                  {descriptionPoints.map((point, index) => (
-                    <div key={index} className="flex items-start gap-2">
-                      <span className="text-yellow-400">★</span>
-                      <span>{point}</span>
-                    </div>
-                  ))}
+              {descriptionPoints.length > 0 && (
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <div className="text-sm font-semibold text-blue-800 mb-2">PROPERTY HIGHLIGHTS</div>
+                  <div className="space-y-1">
+                    {descriptionPoints.map((point, index) => (
+                      <div key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <span>{point}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
-              {/* Auction Info */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="bg-red-600 p-3 rounded-lg text-center">
-                  <div className="text-xs opacity-80">AUCTION DATE</div>
-                  <div className="font-bold">{data.auctionDate}</div>
-                </div>
-                <div className="bg-green-600 p-3 rounded-lg text-center">
-                  <div className="text-xs opacity-80">CONTACT</div>
-                  <div className="font-bold">{data.contact}</div>
-                </div>
-              </div>
-
-              {/* Footer */}
-              <div className="text-center text-xs opacity-60 pt-2 border-t border-white/20">
-                Visit www.marsarcs.com for more properties
+              {/* Contact Section */}
+              <div className="bg-gray-800 text-white p-4 rounded-lg text-center">
+                <div className="text-sm opacity-90">FOR MORE INFORMATION</div>
+                <div className="text-xl font-bold mt-1">📞 {data.contact}</div>
+                <div className="text-xs opacity-75 mt-2">www.marsarcs.com</div>
               </div>
             </div>
           </div>

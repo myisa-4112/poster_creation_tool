@@ -24,10 +24,10 @@ const Index = () => {
     },
     {
       id: 3,
-      name: "Modern Gradient Style",
+      name: "Clean Professional",
       preview: "/images/flat.jpg",
       type: "modern",
-      features: ["Contemporary Design", "Gradient Background", "Feature Cards", "Modern Typography"]
+      features: ["Clean Design", "Clear Image Display", "Professional Layout", "Easy to Read"]
     }
   ];
 

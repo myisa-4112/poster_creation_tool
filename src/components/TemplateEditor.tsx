@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, Upload, Download } from 'lucide-react';
 import PosterPreview from './PosterPreview';
+import html2canvas from 'html2canvas';
 
 interface Template {
   id: number;
@@ -31,6 +32,7 @@ const TemplateEditor: React.FC<TemplateEditorProps> = ({ template, onBack }) => 
   });
 
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({
@@ -50,44 +52,44 @@ const TemplateEditor: React.FC<TemplateEditorProps> = ({ template, onBack }) => 
     }
   };
 
-  const handleDownload = () => {
-    // Create a canvas to render the poster
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    
-    // Set canvas size (A4 proportions)
-    canvas.width = 794;
-    canvas.height = 1123;
-    
-    if (ctx) {
-      // Fill background
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
-      // Add poster content based on template
-      // This is a simplified version - you can enhance it further
-      ctx.fillStyle = '#000000';
-      ctx.font = 'bold 24px Arial';
-      ctx.fillText(formData.title, 50, 100);
-      
-      ctx.font = '18px Arial';
-      ctx.fillText(`Type: ${formData.type}`, 50, 150);
-      ctx.fillText(`Price: ${formData.price}`, 50, 180);
-      ctx.fillText(`Auction Date: ${formData.auctionDate}`, 50, 210);
-      ctx.fillText(`Location: ${formData.location}`, 50, 240);
-      ctx.fillText(`Contact: ${formData.contact}`, 50, 270);
-      
-      // Add description with line breaks
-      const descriptionLines = formData.description.split('\n');
-      descriptionLines.forEach((line, index) => {
-        ctx.fillText(`• ${line}`, 50, 320 + (index * 30));
-      });
-      
-      // Download the canvas as image
-      const link = document.createElement('a');
-      link.download = `${formData.title.replace(/\s+/g, '_')}_poster.png`;
-      link.href = canvas.toDataURL();
-      link.click();
+  const handleDownload = async () => {
+    setIsDownloading(true);
+    try {
+      const posterElement = document.getElementById('poster-content');
+      if (posterElement) {
+        // Configure html2canvas for better quality
+        const canvas = await html2canvas(posterElement, {
+          scale: 3, // Higher resolution
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: '#ffffff',
+          width: posterElement.offsetWidth,
+          height: posterElement.offsetHeight,
+          onclone: (clonedDoc) => {
+            // Ensure images are loaded in the cloned document
+            const images = clonedDoc.querySelectorAll('img');
+            images.forEach((img) => {
+              img.style.maxWidth = '100%';
+              img.style.height = 'auto';
+            });
+          }
+        });
+
+        // Create download link
+        const link = document.createElement('a');
+        link.download = `${formData.title.replace(/\s+/g, '_')}_poster.png`;
+        link.href = canvas.toDataURL('image/png', 1.0);
+        
+        // Trigger download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    } catch (error) {
+      console.error('Error generating poster:', error);
+      alert('Error generating poster. Please try again.');
+    } finally {
+      setIsDownloading(false);
     }
   };
 
@@ -110,10 +112,11 @@ const TemplateEditor: React.FC<TemplateEditorProps> = ({ template, onBack }) => 
           
           <Button
             onClick={handleDownload}
-            className="bg-red-600 hover:bg-red-700 text-white"
+            disabled={isDownloading}
+            className="bg-red-600 hover:bg-red-700 text-white disabled:opacity-50"
           >
             <Download className="w-5 h-5 mr-2" />
-            Download Poster
+            {isDownloading ? 'Generating...' : 'Download Poster'}
           </Button>
         </div>
       </div>
@@ -222,6 +225,9 @@ const TemplateEditor: React.FC<TemplateEditorProps> = ({ template, onBack }) => 
                     <div className="text-center">
                       <Upload className="w-8 h-8 text-white/50 mx-auto mb-2" />
                       <p className="text-white/70">Click to upload property image</p>
+                      {uploadedImage && (
+                        <p className="text-green-400 text-sm mt-1">✓ Image uploaded</p>
+                      )}
                     </div>
                   </label>
                   <input
