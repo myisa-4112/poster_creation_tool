@@ -65,7 +65,7 @@ const Index = () => {
             </h2>
             <div className="h-1 bg-white max-w-2xl mx-auto mb-12"></div>
             <p className="text-white/80 text-xl mb-8">
-              Create professional property auction posters with ease
+              Create professional property auction posters
             </p>
           </div>
         </div>
