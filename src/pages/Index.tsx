@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import TemplateCard from '@/components/TemplateCard';
@@ -11,24 +10,24 @@ const Index = () => {
   const templates = [
     {
       id: 1,
-      name: "Bank Auction Property",
+      name: "Classic Auction Style",
       preview: "/images/residential-flat.jpg",
-      type: "residential",
-      features: ["Property Details", "Contact Info", "Location Map", "Auction Date"]
+      type: "traditional",
+      features: ["Clean Layout", "Professional Design", "Clear Information", "Contact Highlight"]
     },
     {
       id: 2,
-      name: "Villa For Sale",
+      name: "Premium Villa Design",
       preview: "/images/villa-img.jpg",
       type: "luxury",
-      features: ["High-end Design", "Multiple Photos", "Premium Layout", "Contact Details"]
+      features: ["Elegant Design", "Multi-section Layout", "Premium Feel", "Feature Highlights"]
     },
     {
       id: 3,
-      name: "Flat For Sale",
+      name: "Modern Gradient Style",
       preview: "/images/flat.jpg",
-      type: "apartment",
-      features: ["Modern Layout", "Property Features", "Price Highlight", "Contact Info"]
+      type: "modern",
+      features: ["Contemporary Design", "Gradient Background", "Feature Cards", "Modern Typography"]
     }
   ];
 
@@ -65,15 +64,22 @@ const Index = () => {
               CREATION TOOL
             </h2>
             <div className="h-1 bg-white max-w-2xl mx-auto mb-12"></div>
+            <p className="text-white/80 text-xl mb-8">
+              Create professional property auction posters with ease
+            </p>
           </div>
         </div>
       </div>
 
       {/* Template Selection */}
       <div className="px-6 py-12">
-        <h3 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
-          Choose The Available Templates
+        <h3 className="text-3xl md:text-4xl font-bold text-white text-center mb-4">
+          Choose Your Template Style
         </h3>
+        <p className="text-white/70 text-center mb-12 max-w-2xl mx-auto">
+          Select from our professionally designed templates. Each template includes all essential fields: 
+          title, type, price, auction date, location, contact, image, and description.
+        </p>
         
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {templates.map((template) => (
@@ -95,6 +101,12 @@ const Index = () => {
           >
             GET STARTED →
           </Button>
+          
+          {selectedTemplate && (
+            <p className="text-white/70 mt-4">
+              Selected: {templates.find(t => t.id === selectedTemplate)?.name}
+            </p>
+          )}
         </div>
       </div>
     </div>

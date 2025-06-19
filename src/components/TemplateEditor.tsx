@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,21 +22,12 @@ interface TemplateEditorProps {
 const TemplateEditor: React.FC<TemplateEditorProps> = ({ template, onBack }) => {
   const [formData, setFormData] = useState({
     title: 'FLAT FOR SALE',
+    type: 'RESIDENTIAL FLAT',
     price: 'RS.45,00,000/-',
-    location: 'PERUMBAKKAM, KANCHEEPURAM DISTRICT',
-    description: 'Beautiful property with modern amenities',
-    contact: '9884866115',
     auctionDate: '21.05.2025',
-    propertyType: 'RESIDENTIAL FLAT',
-    area: '1084 SFT',
-    builtUpArea: '1084 SFT',
-    landArea: '446 SFT',
-    plotNumber: '3',
-    apartmentName: 'DHATHA SAI NIVAS APARTMENTS',
-    floorNumber: 'S2',
-    facing: 'EAST',
-    parking: 'ONE COVER CAR PARKING',
-    uds: '661'
+    location: 'PERUMBAKKAM, KANCHEEPURAM DISTRICT',
+    contact: '9884866115',
+    description: 'Beautiful property with modern amenities\nPrime location with excellent connectivity\nReady to move condition'
   });
 
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
@@ -61,8 +51,44 @@ const TemplateEditor: React.FC<TemplateEditorProps> = ({ template, onBack }) => 
   };
 
   const handleDownload = () => {
-    console.log('Downloading poster with data:', formData);
-    alert('Poster download functionality would be implemented here!');
+    // Create a canvas to render the poster
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Set canvas size (A4 proportions)
+    canvas.width = 794;
+    canvas.height = 1123;
+    
+    if (ctx) {
+      // Fill background
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Add poster content based on template
+      // This is a simplified version - you can enhance it further
+      ctx.fillStyle = '#000000';
+      ctx.font = 'bold 24px Arial';
+      ctx.fillText(formData.title, 50, 100);
+      
+      ctx.font = '18px Arial';
+      ctx.fillText(`Type: ${formData.type}`, 50, 150);
+      ctx.fillText(`Price: ${formData.price}`, 50, 180);
+      ctx.fillText(`Auction Date: ${formData.auctionDate}`, 50, 210);
+      ctx.fillText(`Location: ${formData.location}`, 50, 240);
+      ctx.fillText(`Contact: ${formData.contact}`, 50, 270);
+      
+      // Add description with line breaks
+      const descriptionLines = formData.description.split('\n');
+      descriptionLines.forEach((line, index) => {
+        ctx.fillText(`• ${line}`, 50, 320 + (index * 30));
+      });
+      
+      // Download the canvas as image
+      const link = document.createElement('a');
+      link.download = `${formData.title.replace(/\s+/g, '_')}_poster.png`;
+      link.href = canvas.toDataURL();
+      link.click();
+    }
   };
 
   return (
@@ -99,38 +125,40 @@ const TemplateEditor: React.FC<TemplateEditorProps> = ({ template, onBack }) => 
             <h2 className="text-2xl font-bold text-white mb-6">Customize Your Poster</h2>
             
             <div className="space-y-4">
-              {/* Basic Information */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="title" className="text-white">Property Title</Label>
-                  <Input
-                    id="title"
-                    value={formData.title}
-                    onChange={(e) => handleInputChange('title', e.target.value)}
-                    className="bg-white/20 border-white/30 text-white placeholder-white/50"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="propertyType" className="text-white">Property Type</Label>
-                  <Input
-                    id="propertyType"
-                    value={formData.propertyType}
-                    onChange={(e) => handleInputChange('propertyType', e.target.value)}
-                    className="bg-white/20 border-white/30 text-white placeholder-white/50"
-                  />
-                </div>
+              {/* Property Title */}
+              <div>
+                <Label htmlFor="title" className="text-white">Property Title</Label>
+                <Input
+                  id="title"
+                  value={formData.title}
+                  onChange={(e) => handleInputChange('title', e.target.value)}
+                  className="bg-white/20 border-white/30 text-white placeholder-white/50"
+                  placeholder="Enter property title"
+                />
               </div>
 
-              {/* Price and Auction Details */}
+              {/* Property Type */}
+              <div>
+                <Label htmlFor="type" className="text-white">Property Type</Label>
+                <Input
+                  id="type"
+                  value={formData.type}
+                  onChange={(e) => handleInputChange('type', e.target.value)}
+                  className="bg-white/20 border-white/30 text-white placeholder-white/50"
+                  placeholder="e.g., Residential Flat, Villa, Commercial"
+                />
+              </div>
+
+              {/* Price and Auction Date */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="price" className="text-white">Reserve Price</Label>
+                  <Label htmlFor="price" className="text-white">Price</Label>
                   <Input
                     id="price"
                     value={formData.price}
                     onChange={(e) => handleInputChange('price', e.target.value)}
                     className="bg-white/20 border-white/30 text-white placeholder-white/50"
+                    placeholder="e.g., RS.45,00,000/-"
                   />
                 </div>
 
@@ -141,112 +169,24 @@ const TemplateEditor: React.FC<TemplateEditorProps> = ({ template, onBack }) => 
                     value={formData.auctionDate}
                     onChange={(e) => handleInputChange('auctionDate', e.target.value)}
                     className="bg-white/20 border-white/30 text-white placeholder-white/50"
+                    placeholder="e.g., 21.05.2025"
                   />
                 </div>
               </div>
 
-              {/* Location Details */}
+              {/* Location */}
               <div>
-                <Label htmlFor="location" className="text-white">Property Location</Label>
-                <Textarea
+                <Label htmlFor="location" className="text-white">Location</Label>
+                <Input
                   id="location"
                   value={formData.location}
                   onChange={(e) => handleInputChange('location', e.target.value)}
                   className="bg-white/20 border-white/30 text-white placeholder-white/50"
-                  rows={2}
+                  placeholder="Enter property location"
                 />
               </div>
 
-              {/* Property Specifications */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <Label htmlFor="builtUpArea" className="text-white">Built-up Area (BUA)</Label>
-                  <Input
-                    id="builtUpArea"
-                    value={formData.builtUpArea}
-                    onChange={(e) => handleInputChange('builtUpArea', e.target.value)}
-                    className="bg-white/20 border-white/30 text-white placeholder-white/50"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="landArea" className="text-white">Land Area</Label>
-                  <Input
-                    id="landArea"
-                    value={formData.landArea}
-                    onChange={(e) => handleInputChange('landArea', e.target.value)}
-                    className="bg-white/20 border-white/30 text-white placeholder-white/50"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="uds" className="text-white">UDS</Label>
-                  <Input
-                    id="uds"
-                    value={formData.uds}
-                    onChange={(e) => handleInputChange('uds', e.target.value)}
-                    className="bg-white/20 border-white/30 text-white placeholder-white/50"
-                  />
-                </div>
-              </div>
-
-              {/* Apartment Details */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="apartmentName" className="text-white">Apartment/Complex Name</Label>
-                  <Input
-                    id="apartmentName"
-                    value={formData.apartmentName}
-                    onChange={(e) => handleInputChange('apartmentName', e.target.value)}
-                    className="bg-white/20 border-white/30 text-white placeholder-white/50"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="floorNumber" className="text-white">Floor Number</Label>
-                  <Input
-                    id="floorNumber"
-                    value={formData.floorNumber}
-                    onChange={(e) => handleInputChange('floorNumber', e.target.value)}
-                    className="bg-white/20 border-white/30 text-white placeholder-white/50"
-                  />
-                </div>
-              </div>
-
-              {/* Additional Details */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <Label htmlFor="plotNumber" className="text-white">Plot Number</Label>
-                  <Input
-                    id="plotNumber"
-                    value={formData.plotNumber}
-                    onChange={(e) => handleInputChange('plotNumber', e.target.value)}
-                    className="bg-white/20 border-white/30 text-white placeholder-white/50"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="facing" className="text-white">Facing Direction</Label>
-                  <Input
-                    id="facing"
-                    value={formData.facing}
-                    onChange={(e) => handleInputChange('facing', e.target.value)}
-                    className="bg-white/20 border-white/30 text-white placeholder-white/50"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="parking" className="text-white">Parking Details</Label>
-                  <Input
-                    id="parking"
-                    value={formData.parking}
-                    onChange={(e) => handleInputChange('parking', e.target.value)}
-                    className="bg-white/20 border-white/30 text-white placeholder-white/50"
-                  />
-                </div>
-              </div>
-
-              {/* Contact Information */}
+              {/* Contact */}
               <div>
                 <Label htmlFor="contact" className="text-white">Contact Number</Label>
                 <Input
@@ -254,29 +194,34 @@ const TemplateEditor: React.FC<TemplateEditorProps> = ({ template, onBack }) => 
                   value={formData.contact}
                   onChange={(e) => handleInputChange('contact', e.target.value)}
                   className="bg-white/20 border-white/30 text-white placeholder-white/50"
+                  placeholder="Enter contact number"
                 />
               </div>
 
               {/* Description */}
               <div>
-                <Label htmlFor="description" className="text-white">Additional Description</Label>
+                <Label htmlFor="description" className="text-white">Description</Label>
                 <Textarea
                   id="description"
                   value={formData.description}
                   onChange={(e) => handleInputChange('description', e.target.value)}
                   className="bg-white/20 border-white/30 text-white placeholder-white/50"
-                  rows={3}
+                  rows={4}
+                  placeholder="Enter description (use new lines for bullet points)"
                 />
+                <p className="text-white/70 text-sm mt-1">
+                  Tip: Each new line will create a bullet point in the poster
+                </p>
               </div>
 
               {/* Image Upload */}
               <div>
-                <Label htmlFor="image" className="text-white">Property Images</Label>
+                <Label htmlFor="image" className="text-white">Property Image</Label>
                 <div className="mt-2">
                   <label htmlFor="image" className="flex items-center justify-center w-full h-32 border-2 border-dashed border-white/30 rounded-lg cursor-pointer hover:border-white/50 transition-colors">
                     <div className="text-center">
                       <Upload className="w-8 h-8 text-white/50 mx-auto mb-2" />
-                      <p className="text-white/70">Click to upload property images</p>
+                      <p className="text-white/70">Click to upload property image</p>
                     </div>
                   </label>
                   <input
