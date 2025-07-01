@@ -38,11 +38,11 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
         {template.id === 1 && (
           <div className="relative h-full flex flex-col">
             {/* Header */}
-            <div className="bg-white p-3 flex items-center justify-between flex-shrink-0">
-              <div className="flex items-center gap-2">
-                <img src="/logo.png" alt="Mars Logo" className="h-8 w-8" />
+            <div className="bg-white p-2 flex items-center justify-between flex-shrink-0">
+              <div className="flex items-center gap-1">
+                <img src="/logo.png" alt="Mars Logo" className="h-6 w-6" />
               </div>
-              <div className="bg-red-600 text-white px-2 py-1 text-xs font-bold whitespace-nowrap">
+              <div className="bg-red-600 text-white px-2 py-1 text-xs font-bold">
                 BANK AUCTION PROPERTIES
               </div>
             </div>
@@ -57,7 +57,7 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
             </div>
 
             {/* Content */}
-            <div className="p-3 space-y-2 flex-1 flex flex-col">
+            <div className="p-2 space-y-2 flex-1 flex flex-col">
               <div className="text-center">
                 <h2 className="text-sm font-bold text-black flex items-center justify-center gap-1">
                   <span className="text-red-600">❖</span> {data.title}
@@ -65,16 +65,16 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
               </div>
 
               <div className="space-y-1 text-xs flex-1">
-                <div className="flex items-start gap-1">
+                <div className="flex items-center gap-1">
                   <span className="text-red-600 flex-shrink-0">❖</span>
-                  <div>
+                  <div className="flex items-center gap-1">
                     <strong>PROPERTY TYPE:</strong> <span className="text-red-600 font-bold">{data.type}</span>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-1">
+                <div className="flex items-center gap-1">
                   <span className="text-red-600 flex-shrink-0">❖</span>
-                  <div>
+                  <div className="flex items-center gap-1">
                     <strong>PROPERTY LOCATION:</strong> <span className="text-red-600 font-bold">{data.location}</span>
                   </div>
                 </div>
@@ -114,12 +114,12 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
         {template.id === 2 && (
           <div className="relative bg-gradient-to-br from-orange-100 to-orange-200 h-full flex flex-col">
             {/* Header with Logo */}
-            <div className="relative p-3 flex-shrink-0">
-              <div className="absolute top-0 right-0 bg-red-600 text-white px-3 py-1 font-bold text-xs">
+            <div className="relative p-2 flex-shrink-0">
+              <div className="absolute top-0 right-0 bg-red-600 text-white px-2 py-1 font-bold text-xs">
                 BANK AUCTION PROPERTIES
               </div>
-              <div className="flex items-center gap-2">
-                <img src="/logo.png" alt="Mars Logo" className="h-8 w-8" />
+              <div className="flex items-center gap-1">
+                <img src="/logo.png" alt="Mars Logo" className="h-6 w-6" />
               </div>
             </div>
 
@@ -133,13 +133,17 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
             </div>
 
             {/* Villa For Sale Section */}
-            <div className="p-3 flex-1 flex flex-col">
-              <div className="bg-gray-700 text-white p-3 -mx-3 mb-3 flex-shrink-0">
+            <div className="p-2 flex-1 flex flex-col">
+              <div className="bg-gray-200 text-gray-800 p-2 -mx-2 mb-2 flex-shrink-0">
                 <h1 className="text-lg font-bold italic">{data.title.split(' ')[0]}</h1>
-                <h2 className="text-sm font-bold italic text-red-400">{data.title.includes('FOR SALE') ? 'FOR SALE' : data.title.includes('SALE') ? 'FOR SALE' : 'AVAILABLE'}</h2>
+                <h2 className="text-sm font-bold italic text-red-600">
+                  {data.title.toUpperCase().includes('SALE') ? 'FOR SALE' : 
+                   data.title.toUpperCase().includes('RENT') ? 'FOR RENT' : 
+                   data.title.toUpperCase().includes('AUCTION') ? 'FOR AUCTION' : 'AVAILABLE'}
+                </h2>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 text-xs flex-1">
+              <div className="grid grid-cols-2 gap-2 text-xs flex-1">
                 <div>
                   <div className="mb-2">
                     <strong>LOCATED AT :</strong> {data.location}
@@ -177,9 +181,9 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
         {template.id === 3 && (
           <div className="relative bg-white h-full flex flex-col">
             {/* Header */}
-            <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-3 flex-shrink-0">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-2 flex-shrink-0">
               <div className="flex items-center justify-between">
-                <img src="/logo.png" alt="Mars Logo" className="h-8 w-8" />
+                <img src="/logo.png" alt="Mars Logo" className="h-6 w-6" />
                 <div className="text-right">
                   <div className="text-xs font-medium">PREMIUM PROPERTY</div>
                   <div className="text-xs opacity-90">AUCTION SALE</div>
@@ -197,7 +201,7 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
             </div>
 
             {/* Main Content */}
-            <div className="p-3 space-y-3 flex-1 flex flex-col">
+            <div className="p-2 space-y-2 flex-1 flex flex-col">
               {/* Title Section */}
               <div className="text-center border-b border-gray-200 pb-2 flex-shrink-0">
                 <h1 className="text-sm font-bold text-gray-800 mb-1">{data.title}</h1>
@@ -207,7 +211,7 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
               </div>
 
               {/* Price Highlight */}
-              <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-3 rounded-lg text-center flex-shrink-0">
+              <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-2 rounded-lg text-center flex-shrink-0">
                 <div className="text-xs opacity-90">STARTING PRICE</div>
                 <div className="text-sm font-bold">{data.price}</div>
               </div>
@@ -229,11 +233,11 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
 
               {/* Features */}
               {descriptionPoints.length > 0 && (
-                <div className="bg-blue-50 p-3 rounded-lg flex-1">
-                  <div className="text-xs font-semibold text-blue-800 mb-2">PROPERTY HIGHLIGHTS</div>
+                <div className="bg-blue-50 p-2 rounded-lg flex-1">
+                  <div className="text-xs font-semibold text-blue-800 mb-1">PROPERTY HIGHLIGHTS</div>
                   <div className="space-y-1">
                     {descriptionPoints.map((point, index) => (
-                      <div key={index} className="flex items-start gap-2 text-xs text-gray-700">
+                      <div key={index} className="flex items-start gap-1 text-xs text-gray-700">
                         <div className="w-1 h-1 bg-blue-500 rounded-full mt-1 flex-shrink-0"></div>
                         <span>{point}</span>
                       </div>
@@ -243,7 +247,7 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
               )}
 
               {/* Contact Section */}
-              <div className="bg-gray-800 text-white p-3 rounded-lg text-center flex-shrink-0">
+              <div className="bg-gray-800 text-white p-2 rounded-lg text-center flex-shrink-0">
                 <div className="text-xs opacity-90">FOR MORE INFORMATION</div>
                 <div className="text-sm font-bold mt-1">📞 {data.contact}</div>
                 <div className="text-xs opacity-75 mt-1">www.marsarcs.com</div>
