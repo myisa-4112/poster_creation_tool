@@ -51,227 +51,419 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
     <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
       <h3 className="text-xl font-bold text-white mb-4">Live Preview</h3>
       
-      <div id="poster-content" className="bg-white rounded-lg overflow-hidden shadow-2xl mx-auto" style={{ width: '270px', height: '480px' }}>
-        {/* Template 1 - Bank Auction Properties (List Style) */}
+      <div 
+        id="poster-content" 
+        className="bg-white rounded-lg overflow-hidden shadow-2xl mx-auto relative"
+        style={{ 
+          width: '270px', 
+          height: '480px',
+          position: 'relative'
+        }}
+      >
+        {/* Template 1 - Bank Auction Properties */}
         {template.id === 1 && (
-          <div className="relative w-full h-full flex flex-col">
-            {/* Header - Fixed positioning */}
-            <div className="bg-white p-2 flex items-center justify-between flex-shrink-0" style={{ minHeight: '60px' }}>
-              <div className="flex items-center">
-                <img src="/logo.png" alt="Mars Logo" className="h-10 w-10 flex-shrink-0" />
-              </div>
-              <div className="bg-red-600 text-white px-2 py-1 text-xs font-bold whitespace-nowrap">
+          <div style={{ width: '270px', height: '480px', position: 'relative' }}>
+            {/* Header */}
+            <div 
+              className="bg-white flex items-center justify-between"
+              style={{ 
+                position: 'absolute',
+                top: '0px',
+                left: '0px',
+                width: '270px',
+                height: '50px',
+                padding: '8px'
+              }}
+            >
+              <img src="/logo.png" alt="Mars Logo" style={{ height: '34px', width: '34px' }} />
+              <div 
+                className="bg-red-600 text-white font-bold text-center"
+                style={{ 
+                  fontSize: '8px',
+                  padding: '4px 6px',
+                  lineHeight: '1'
+                }}
+              >
                 BANK AUCTION PROPERTIES
               </div>
             </div>
 
-            {/* Property Image - Fixed height */}
-            <div className="h-32 bg-gray-200 overflow-hidden flex-shrink-0">
+            {/* Property Image */}
+            <div 
+              className="bg-gray-200 overflow-hidden"
+              style={{
+                position: 'absolute',
+                top: '50px',
+                left: '0px',
+                width: '270px',
+                height: '120px'
+              }}
+            >
               <img 
                 src={image || template.preview} 
                 alt="Property"
-                className="w-full h-full object-cover"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
 
-            {/* Content - Flexible area */}
-            <div className="p-3 flex-1 flex flex-col justify-between">
-              {/* Title Section */}
-              <div className="text-center mb-2">
-                <h2 className="text-sm font-bold text-black flex items-center justify-center gap-1">
-                  <span className="text-red-600">❖</span> 
-                  <span className="truncate">{data.title}</span>
-                </h2>
+            {/* Title */}
+            <div 
+              className="text-center"
+              style={{
+                position: 'absolute',
+                top: '178px',
+                left: '8px',
+                width: '254px',
+                height: '20px'
+              }}
+            >
+              <h2 
+                className="text-black font-bold flex items-center justify-center gap-1"
+                style={{ fontSize: '11px', lineHeight: '1.2' }}
+              >
+                <span className="text-red-600">❖</span> 
+                <span>{data.title}</span>
+              </h2>
+            </div>
+
+            {/* Property Type */}
+            <div 
+              className="flex items-start gap-1"
+              style={{
+                position: 'absolute',
+                top: '206px',
+                left: '8px',
+                width: '254px',
+                height: '16px'
+              }}
+            >
+              <span className="text-red-600" style={{ fontSize: '10px' }}>❖</span>
+              <div style={{ fontSize: '10px' }}>
+                <strong>PROPERTY TYPE:</strong> <span className="text-red-600 font-bold">{data.type}</span>
               </div>
+            </div>
 
-              {/* Property Details */}
-              <div className="space-y-2 text-xs flex-1">
-                <div className="flex items-start gap-1">
-                  <span className="text-red-600 flex-shrink-0">❖</span>
-                  <div className="min-w-0">
-                    <strong>PROPERTY TYPE:</strong> <span className="text-red-600 font-bold">{data.type}</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-1">
-                  <span className="text-red-600 flex-shrink-0">❖</span>
-                  <div className="min-w-0">
-                    <strong>PROPERTY LOCATION:</strong>
-                    <div className="text-red-600 font-bold text-xs leading-tight">{data.location}</div>
-                  </div>
-                </div>
-
-                {/* Fixed 3 Description Points */}
-                <div className="border border-gray-400 p-2 space-y-1">
-                  {descriptionPoints.map((point, index) => (
-                    <div key={index} className="flex items-start gap-1">
-                      <span className="text-red-600 flex-shrink-0">❖</span>
-                      <span className="text-xs leading-tight"><strong>{point}</strong></span>
-                    </div>
-                  ))}
-                </div>
+            {/* Property Location */}
+            <div 
+              className="flex items-start gap-1"
+              style={{
+                position: 'absolute',
+                top: '230px',
+                left: '8px',
+                width: '254px',
+                height: '24px'
+              }}
+            >
+              <span className="text-red-600" style={{ fontSize: '10px' }}>❖</span>
+              <div style={{ fontSize: '10px' }}>
+                <strong>PROPERTY LOCATION:</strong>
+                <div className="text-red-600 font-bold">{data.location}</div>
               </div>
+            </div>
 
-              {/* Bottom Section - Fixed positioning */}
-              <div className="space-y-2 mt-2">
-                {/* Reserve Price */}
-                <div className="text-center bg-yellow-300 p-2 rounded">
-                  <div className="font-bold text-sm text-red-600">RESERVE PRICE: {data.price}</div>
+            {/* Description Points */}
+            <div 
+              className="border border-gray-400 p-2"
+              style={{
+                position: 'absolute',
+                top: '262px',
+                left: '8px',
+                width: '254px',
+                height: '60px'
+              }}
+            >
+              {descriptionPoints.map((point, index) => (
+                <div key={index} className="flex items-start gap-1" style={{ marginBottom: '2px' }}>
+                  <span className="text-red-600" style={{ fontSize: '9px' }}>❖</span>
+                  <span style={{ fontSize: '9px', fontWeight: 'bold', lineHeight: '1.2' }}>{point}</span>
                 </div>
+              ))}
+            </div>
 
-                {/* Auction Date */}
-                <div className="text-center border border-blue-500 p-1">
-                  <div className="text-blue-600 font-bold text-xs">LAST DATE OF AUCTION: {data.auctionDate}</div>
-                </div>
+            {/* Reserve Price */}
+            <div 
+              className="text-center bg-yellow-300 rounded"
+              style={{
+                position: 'absolute',
+                top: '330px',
+                left: '8px',
+                width: '254px',
+                height: '30px',
+                padding: '6px'
+              }}
+            >
+              <div className="font-bold text-red-600" style={{ fontSize: '11px' }}>
+                RESERVE PRICE: {data.price}
+              </div>
+            </div>
 
-                {/* Contact Numbers */}
-                <div className="text-center">
-                  <div className="text-red-600 font-bold text-lg">PH - {data.contact}</div>
-                </div>
+            {/* Auction Date */}
+            <div 
+              className="text-center border border-blue-500"
+              style={{
+                position: 'absolute',
+                top: '368px',
+                left: '8px',
+                width: '254px',
+                height: '24px',
+                padding: '4px'
+              }}
+            >
+              <div className="text-blue-600 font-bold" style={{ fontSize: '10px' }}>
+                LAST DATE OF AUCTION: {data.auctionDate}
+              </div>
+            </div>
+
+            {/* Contact */}
+            <div 
+              className="text-center"
+              style={{
+                position: 'absolute',
+                top: '400px',
+                left: '8px',
+                width: '254px',
+                height: '30px',
+                padding: '6px'
+              }}
+            >
+              <div className="text-red-600 font-bold" style={{ fontSize: '16px' }}>
+                PH - {data.contact}
               </div>
             </div>
           </div>
         )}
 
-        {/* Template 2 - Villa For Sale (Multi-image Style) */}
+        {/* Template 2 - Villa Style */}
         {template.id === 2 && (
-          <div className="relative bg-gradient-to-br from-orange-100 to-orange-200 w-full h-full flex flex-col">
-            {/* Header with Logo - Fixed */}
-            <div className="relative p-2 flex-shrink-0">
-              <div className="absolute top-0 right-0 bg-red-600 text-white px-2 py-1 font-bold text-xs">
+          <div 
+            className="bg-gradient-to-br from-orange-100 to-orange-200"
+            style={{ width: '270px', height: '480px', position: 'relative' }}
+          >
+            {/* Header */}
+            <div style={{ position: 'absolute', top: '0px', left: '0px', width: '270px', height: '50px', padding: '8px' }}>
+              <div 
+                className="bg-red-600 text-white font-bold text-center"
+                style={{ 
+                  position: 'absolute',
+                  top: '0px',
+                  right: '0px',
+                  fontSize: '8px',
+                  padding: '4px 6px'
+                }}
+              >
                 BANK AUCTION PROPERTIES
               </div>
-              <div className="flex items-center">
-                <img src="/logo.png" alt="Mars Logo" className="h-10 w-10" />
-              </div>
+              <img src="/logo.png" alt="Mars Logo" style={{ height: '34px', width: '34px' }} />
             </div>
 
-            {/* Main Property Image - Fixed height */}
-            <div className="h-32 bg-gray-200 overflow-hidden flex-shrink-0">
+            {/* Property Image */}
+            <div 
+              className="bg-gray-200 overflow-hidden"
+              style={{
+                position: 'absolute',
+                top: '50px',
+                left: '0px',
+                width: '270px',
+                height: '120px'
+              }}
+            >
               <img 
                 src={image || template.preview} 
                 alt="Property"
-                className="w-full h-full object-cover"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
 
-            {/* Content Area - Flexible */}
-            <div className="p-3 flex-1 flex flex-col">
-              {/* Dynamic Title Section */}
-              <div className="bg-gray-200 text-gray-800 p-2 -mx-3 mb-3 flex-shrink-0">
-                <h1 className="text-lg font-bold">{data.title.split(' ')[0]}</h1>
-                <h2 className="text-sm font-bold text-red-600">{getDynamicTitle()}</h2>
+            {/* Title Section */}
+            <div 
+              className="bg-gray-200 text-gray-800"
+              style={{
+                position: 'absolute',
+                top: '178px',
+                left: '0px',
+                width: '270px',
+                height: '50px',
+                padding: '8px'
+              }}
+            >
+              <h1 style={{ fontSize: '14px', fontWeight: 'bold', margin: '0' }}>{data.title.split(' ')[0]}</h1>
+              <h2 style={{ fontSize: '12px', fontWeight: 'bold', color: '#dc2626', margin: '0' }}>{getDynamicTitle()}</h2>
+            </div>
+
+            {/* Left Column */}
+            <div style={{ position: 'absolute', top: '236px', left: '8px', width: '125px', height: '180px' }}>
+              <div style={{ marginBottom: '12px' }}>
+                <div style={{ fontSize: '9px', fontWeight: 'bold' }}>LOCATED AT:</div>
+                <div style={{ fontSize: '9px', lineHeight: '1.2' }}>{data.location}</div>
               </div>
+              <div style={{ marginBottom: '12px' }}>
+                <div style={{ fontSize: '9px', fontWeight: 'bold' }}>TYPE:</div>
+                <div style={{ fontSize: '9px' }}>{data.type}</div>
+              </div>
+              <div style={{ fontSize: '11px', fontWeight: 'bold' }}>
+                PH NO: {data.contact}
+              </div>
+            </div>
 
-              {/* Main Content Grid */}
-              <div className="grid grid-cols-2 gap-3 text-xs flex-1">
-                <div className="space-y-2">
-                  <div>
-                    <strong>LOCATED AT:</strong>
-                    <div className="text-xs leading-tight">{data.location}</div>
+            {/* Right Column */}
+            <div style={{ position: 'absolute', top: '236px', left: '137px', width: '125px', height: '180px' }}>
+              <div 
+                className="bg-red-600 text-white text-center rounded"
+                style={{ padding: '6px', marginBottom: '8px' }}
+              >
+                <div style={{ fontSize: '8px' }}>RESERVE PRICE</div>
+                <div style={{ fontSize: '10px', fontWeight: 'bold' }}>{data.price}</div>
+              </div>
+              
+              <div style={{ marginBottom: '8px' }}>
+                {descriptionPoints.map((point, index) => (
+                  <div key={index} style={{ fontSize: '8px', marginBottom: '2px' }}>
+                    <span className="text-red-600">•</span> <strong>{point}</strong>
                   </div>
-                  <div>
-                    <strong>TYPE:</strong> {data.type}
-                  </div>
-                  <div className="text-sm font-bold">
-                    PH NO: {data.contact}
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="bg-red-600 text-white p-2 rounded text-center">
-                    <div className="text-xs">RESERVE PRICE</div>
-                    <div className="text-sm font-bold">{data.price}</div>
-                  </div>
-                  
-                  <div className="space-y-1">
-                    {descriptionPoints.map((point, index) => (
-                      <div key={index} className="text-xs">
-                        <span className="text-red-600">•</span> <strong>{point}</strong>
-                      </div>
-                    ))}
-                  </div>
-                  
-                  <div className="text-xs">
-                    <strong>AUCTION DATE: {data.auctionDate}</strong>
-                  </div>
-                </div>
+                ))}
+              </div>
+              
+              <div style={{ fontSize: '8px', fontWeight: 'bold' }}>
+                AUCTION DATE: {data.auctionDate}
               </div>
             </div>
           </div>
         )}
 
-        {/* Template 3 - Modern Professional Design */}
+        {/* Template 3 - Modern Professional */}
         {template.id === 3 && (
-          <div className="relative bg-white w-full h-full flex flex-col">
-            {/* Header - Fixed */}
-            <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-3 flex-shrink-0">
-              <div className="flex items-center justify-between">
-                <img src="/logo.png" alt="Mars Logo" className="h-10 w-10" />
+          <div style={{ width: '270px', height: '480px', position: 'relative', backgroundColor: 'white' }}>
+            {/* Header */}
+            <div 
+              className="bg-gradient-to-r from-blue-600 to-blue-800 text-white"
+              style={{
+                position: 'absolute',
+                top: '0px',
+                left: '0px',
+                width: '270px',
+                height: '50px',
+                padding: '8px'
+              }}
+            >
+              <div className="flex items-center justify-between" style={{ height: '100%' }}>
+                <img src="/logo.png" alt="Mars Logo" style={{ height: '34px', width: '34px' }} />
                 <div className="text-right">
-                  <div className="text-xs font-medium">PREMIUM PROPERTY</div>
-                  <div className="text-xs opacity-90">AUCTION SALE</div>
+                  <div style={{ fontSize: '8px', fontWeight: '500' }}>PREMIUM PROPERTY</div>
+                  <div style={{ fontSize: '7px', opacity: '0.9' }}>AUCTION SALE</div>
                 </div>
               </div>
             </div>
 
-            {/* Property Image - Fixed height */}
-            <div className="h-36 bg-gray-100 overflow-hidden flex-shrink-0">
+            {/* Property Image */}
+            <div 
+              className="bg-gray-100 overflow-hidden"
+              style={{
+                position: 'absolute',
+                top: '50px',
+                left: '0px',
+                width: '270px',
+                height: '130px'
+              }}
+            >
               <img 
                 src={image || template.preview} 
                 alt="Property"
-                className="w-full h-full object-cover"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
 
-            {/* Main Content - Flexible */}
-            <div className="p-3 space-y-3 flex-1 flex flex-col">
-              {/* Title Section */}
-              <div className="text-center border-b border-gray-200 pb-2 flex-shrink-0">
-                <h1 className="text-sm font-bold text-gray-800 mb-1">{data.title}</h1>
-                <div className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium inline-block">
-                  {data.type}
+            {/* Title Section */}
+            <div 
+              className="text-center border-b border-gray-200"
+              style={{
+                position: 'absolute',
+                top: '188px',
+                left: '8px',
+                width: '254px',
+                height: '40px',
+                paddingBottom: '8px'
+              }}
+            >
+              <h1 style={{ fontSize: '11px', fontWeight: 'bold', color: '#374151', margin: '0 0 4px 0' }}>{data.title}</h1>
+              <div 
+                className="bg-blue-100 text-blue-800 rounded-full inline-block"
+                style={{ fontSize: '8px', fontWeight: '500', padding: '2px 8px' }}
+              >
+                {data.type}
+              </div>
+            </div>
+
+            {/* Price Highlight */}
+            <div 
+              className="bg-gradient-to-r from-green-500 to-green-600 text-white text-center rounded-lg"
+              style={{
+                position: 'absolute',
+                top: '236px',
+                left: '8px',
+                width: '254px',
+                height: '40px',
+                padding: '8px'
+              }}
+            >
+              <div style={{ fontSize: '8px', opacity: '0.9' }}>STARTING PRICE</div>
+              <div style={{ fontSize: '14px', fontWeight: 'bold' }}>{data.price}</div>
+            </div>
+
+            {/* Location and Date Grid */}
+            <div style={{ position: 'absolute', top: '284px', left: '8px', width: '254px', height: '40px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', height: '100%' }}>
+                <div className="bg-gray-50 rounded-lg" style={{ padding: '6px' }}>
+                  <div style={{ fontSize: '7px', color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Location</div>
+                  <div style={{ fontSize: '8px', fontWeight: '500', color: '#374151', marginTop: '2px', lineHeight: '1.2' }}>{data.location}</div>
+                </div>
+                <div className="bg-red-50 rounded-lg" style={{ padding: '6px' }}>
+                  <div style={{ fontSize: '7px', color: '#dc2626', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Auction Date</div>
+                  <div style={{ fontSize: '8px', fontWeight: 'bold', color: '#b91c1c', marginTop: '2px' }}>{data.auctionDate}</div>
                 </div>
               </div>
+            </div>
 
-              {/* Price Highlight */}
-              <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-3 rounded-lg text-center flex-shrink-0">
-                <div className="text-xs opacity-90">STARTING PRICE</div>
-                <div className="text-lg font-bold">{data.price}</div>
+            {/* Features */}
+            <div 
+              className="bg-blue-50 rounded-lg"
+              style={{
+                position: 'absolute',
+                top: '332px',
+                left: '8px',
+                width: '254px',
+                height: '80px',
+                padding: '8px'
+              }}
+            >
+              <div style={{ fontSize: '8px', fontWeight: '600', color: '#1e40af', marginBottom: '6px' }}>PROPERTY HIGHLIGHTS</div>
+              <div>
+                {descriptionPoints.map((point, index) => (
+                  <div key={index} className="flex items-start gap-2" style={{ fontSize: '8px', color: '#374151', marginBottom: '2px' }}>
+                    <div 
+                      className="bg-blue-500 rounded-full"
+                      style={{ width: '4px', height: '4px', marginTop: '4px', flexShrink: 0 }}
+                    ></div>
+                    <span style={{ lineHeight: '1.3' }}>{point}</span>
+                  </div>
+                ))}
               </div>
+            </div>
 
-              {/* Property Details Grid */}
-              <div className="grid grid-cols-2 gap-2 flex-shrink-0">
-                <div className="bg-gray-50 p-2 rounded-lg">
-                  <div className="text-xs text-gray-600 uppercase tracking-wide">Location</div>
-                  <div className="text-xs font-medium text-gray-800 mt-1 leading-tight">{data.location}</div>
-                </div>
-
-                <div className="bg-red-50 p-2 rounded-lg">
-                  <div className="text-xs text-red-600 uppercase tracking-wide">Auction Date</div>
-                  <div className="text-xs font-bold text-red-700 mt-1">{data.auctionDate}</div>
-                </div>
-              </div>
-
-              {/* Features - Flexible area */}
-              <div className="bg-blue-50 p-3 rounded-lg flex-1">
-                <div className="text-xs font-semibold text-blue-800 mb-2">PROPERTY HIGHLIGHTS</div>
-                <div className="space-y-1">
-                  {descriptionPoints.map((point, index) => (
-                    <div key={index} className="flex items-start gap-2 text-xs text-gray-700">
-                      <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 flex-shrink-0"></div>
-                      <span className="leading-tight">{point}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Contact Section - Fixed at bottom */}
-              <div className="bg-gray-800 text-white p-3 rounded-lg text-center flex-shrink-0">
-                <div className="text-xs opacity-90">FOR MORE INFORMATION</div>
-                <div className="text-lg font-bold mt-1">📞 {data.contact}</div>
-                <div className="text-xs opacity-75 mt-1">www.marsarcs.com</div>
-              </div>
+            {/* Contact Section */}
+            <div 
+              className="bg-gray-800 text-white text-center rounded-lg"
+              style={{
+                position: 'absolute',
+                top: '420px',
+                left: '8px',
+                width: '254px',
+                height: '52px',
+                padding: '8px'
+              }}
+            >
+              <div style={{ fontSize: '8px', opacity: '0.9' }}>FOR MORE INFORMATION</div>
+              <div style={{ fontSize: '14px', fontWeight: 'bold', marginTop: '2px' }}>📞 {data.contact}</div>
+              <div style={{ fontSize: '7px', opacity: '0.75', marginTop: '2px' }}>www.marsarcs.com</div>
             </div>
           </div>
         )}
