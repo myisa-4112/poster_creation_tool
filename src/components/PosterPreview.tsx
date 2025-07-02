@@ -56,609 +56,568 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
         style={{ 
           width: '270px', 
           height: '480px',
-          position: 'relative',
           backgroundColor: 'white',
           borderRadius: '8px',
           overflow: 'hidden',
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
           margin: '0 auto',
-          fontFamily: 'Arial, sans-serif'
+          fontFamily: 'Arial, sans-serif',
+          fontSize: '12px',
+          lineHeight: '1.2',
+          boxSizing: 'border-box'
         }}
       >
         {/* Template 1 - Bank Auction Properties */}
         {template.id === 1 && (
-          <div style={{ width: '270px', height: '480px', position: 'relative', backgroundColor: 'white' }}>
-            {/* Header */}
-            <div style={{ 
-              position: 'absolute',
-              top: '0px',
-              left: '0px',
-              width: '270px',
-              height: '50px',
-              backgroundColor: 'white',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '8px',
-              boxSizing: 'border-box'
-            }}>
-              <img 
-                src="/logo.png" 
-                alt="Mars Logo" 
-                style={{ height: '34px', width: '34px', display: 'block' }} 
-              />
-              <div style={{ 
-                backgroundColor: '#dc2626',
-                color: 'white',
-                fontSize: '8px',
-                fontWeight: 'bold',
-                padding: '4px 6px',
-                lineHeight: '1',
-                textAlign: 'center'
-              }}>
-                BANK AUCTION PROPERTIES
-              </div>
-            </div>
-
-            {/* Property Image */}
-            <div style={{
-              position: 'absolute',
-              top: '50px',
-              left: '0px',
-              width: '270px',
-              height: '120px',
-              backgroundColor: '#e5e7eb',
-              overflow: 'hidden'
-            }}>
-              <img 
-                src={image || template.preview} 
-                alt="Property"
-                style={{ 
-                  width: '100%', 
-                  height: '100%', 
-                  objectFit: 'cover',
-                  display: 'block'
-                }}
-              />
-            </div>
-
-            {/* Title */}
-            <div style={{
-              position: 'absolute',
-              top: '178px',
-              left: '8px',
-              width: '254px',
-              height: '20px',
-              textAlign: 'center',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              <span style={{ color: '#dc2626', fontSize: '11px', marginRight: '4px' }}>❖</span>
-              <span style={{ 
-                color: 'black', 
-                fontSize: '11px', 
-                fontWeight: 'bold',
-                lineHeight: '1.2'
-              }}>
-                {data.title}
-              </span>
-            </div>
-
-            {/* Property Type */}
-            <div style={{
-              position: 'absolute',
-              top: '206px',
-              left: '8px',
-              width: '254px',
-              height: '16px',
-              display: 'flex',
-              alignItems: 'flex-start'
-            }}>
-              <span style={{ color: '#dc2626', fontSize: '10px', marginRight: '4px' }}>❖</span>
-              <div style={{ fontSize: '10px', lineHeight: '1.2' }}>
-                <span style={{ fontWeight: 'bold' }}>PROPERTY TYPE:</span>
-                <span style={{ color: '#dc2626', fontWeight: 'bold', marginLeft: '4px' }}>{data.type}</span>
-              </div>
-            </div>
-
-            {/* Property Location */}
-            <div style={{
-              position: 'absolute',
-              top: '230px',
-              left: '8px',
-              width: '254px',
-              height: '24px',
-              display: 'flex',
-              alignItems: 'flex-start'
-            }}>
-              <span style={{ color: '#dc2626', fontSize: '10px', marginRight: '4px', marginTop: '1px' }}>❖</span>
-              <div style={{ fontSize: '10px', lineHeight: '1.2' }}>
-                <div style={{ fontWeight: 'bold', marginBottom: '2px' }}>PROPERTY LOCATION:</div>
-                <div style={{ color: '#dc2626', fontWeight: 'bold' }}>{data.location}</div>
-              </div>
-            </div>
-
-            {/* Description Points */}
-            <div style={{
-              position: 'absolute',
-              top: '262px',
-              left: '8px',
-              width: '254px',
-              height: '60px',
-              border: '1px solid #9ca3af',
-              padding: '8px',
-              boxSizing: 'border-box'
-            }}>
-              {descriptionPoints.map((point, index) => (
-                <div key={index} style={{ 
-                  display: 'flex', 
-                  alignItems: 'flex-start', 
-                  marginBottom: '2px',
-                  lineHeight: '1.2'
+          <table style={{ 
+            width: '270px', 
+            height: '480px', 
+            backgroundColor: 'white',
+            borderCollapse: 'collapse',
+            tableLayout: 'fixed',
+            margin: '0',
+            padding: '0'
+          }}>
+            <tbody>
+              {/* Header Row */}
+              <tr style={{ height: '50px' }}>
+                <td style={{ 
+                  padding: '8px',
+                  backgroundColor: 'white',
+                  verticalAlign: 'middle'
                 }}>
-                  <span style={{ color: '#dc2626', fontSize: '9px', marginRight: '4px' }}>❖</span>
-                  <span style={{ fontSize: '9px', fontWeight: 'bold' }}>{point}</span>
-                </div>
-              ))}
-            </div>
+                  <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'space-between',
+                    height: '34px'
+                  }}>
+                    <img 
+                      src="/logo.png" 
+                      alt="Mars Logo" 
+                      style={{ height: '34px', width: '34px', display: 'block' }} 
+                    />
+                    <div style={{ 
+                      backgroundColor: '#dc2626',
+                      color: 'white',
+                      fontSize: '8px',
+                      fontWeight: 'bold',
+                      padding: '4px 6px',
+                      whiteSpace: 'nowrap'
+                    }}>
+                      BANK AUCTION PROPERTIES
+                    </div>
+                  </div>
+                </td>
+              </tr>
 
-            {/* Reserve Price */}
-            <div style={{
-              position: 'absolute',
-              top: '330px',
-              left: '8px',
-              width: '254px',
-              height: '30px',
-              backgroundColor: '#fde047',
-              borderRadius: '4px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              <div style={{ 
-                fontSize: '11px', 
-                fontWeight: 'bold', 
-                color: '#dc2626',
-                textAlign: 'center'
-              }}>
-                RESERVE PRICE: {data.price}
-              </div>
-            </div>
+              {/* Image Row */}
+              <tr style={{ height: '120px' }}>
+                <td style={{ padding: '0', backgroundColor: '#e5e7eb' }}>
+                  <img 
+                    src={image || template.preview} 
+                    alt="Property"
+                    style={{ 
+                      width: '270px', 
+                      height: '120px', 
+                      objectFit: 'cover',
+                      display: 'block'
+                    }}
+                  />
+                </td>
+              </tr>
 
-            {/* Auction Date */}
-            <div style={{
-              position: 'absolute',
-              top: '368px',
-              left: '8px',
-              width: '254px',
-              height: '24px',
-              border: '1px solid #3b82f6',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              <div style={{ 
-                fontSize: '10px', 
-                fontWeight: 'bold', 
-                color: '#3b82f6',
-                textAlign: 'center'
-              }}>
-                LAST DATE OF AUCTION: {data.auctionDate}
-              </div>
-            </div>
+              {/* Title Row */}
+              <tr style={{ height: '25px' }}>
+                <td style={{ 
+                  padding: '8px',
+                  textAlign: 'center',
+                  verticalAlign: 'middle'
+                }}>
+                  <div style={{ fontSize: '11px', fontWeight: 'bold', color: 'black' }}>
+                    <span style={{ color: '#dc2626', marginRight: '4px' }}>❖</span>
+                    {data.title}
+                  </div>
+                </td>
+              </tr>
 
-            {/* Contact */}
-            <div style={{
-              position: 'absolute',
-              top: '400px',
-              left: '8px',
-              width: '254px',
-              height: '30px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              <div style={{ 
-                fontSize: '16px', 
-                fontWeight: 'bold', 
-                color: '#dc2626',
-                textAlign: 'center'
-              }}>
-                PH - {data.contact}
-              </div>
-            </div>
-          </div>
+              {/* Property Type Row */}
+              <tr style={{ height: '20px' }}>
+                <td style={{ 
+                  padding: '0 8px',
+                  verticalAlign: 'top'
+                }}>
+                  <div style={{ fontSize: '10px', display: 'flex', alignItems: 'flex-start' }}>
+                    <span style={{ color: '#dc2626', marginRight: '4px' }}>❖</span>
+                    <div>
+                      <span style={{ fontWeight: 'bold' }}>PROPERTY TYPE:</span>
+                      <span style={{ color: '#dc2626', fontWeight: 'bold', marginLeft: '4px' }}>{data.type}</span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              {/* Location Row */}
+              <tr style={{ height: '30px' }}>
+                <td style={{ 
+                  padding: '0 8px',
+                  verticalAlign: 'top'
+                }}>
+                  <div style={{ fontSize: '10px', display: 'flex', alignItems: 'flex-start' }}>
+                    <span style={{ color: '#dc2626', marginRight: '4px' }}>❖</span>
+                    <div>
+                      <div style={{ fontWeight: 'bold', marginBottom: '2px' }}>PROPERTY LOCATION:</div>
+                      <div style={{ color: '#dc2626', fontWeight: 'bold' }}>{data.location}</div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              {/* Description Row */}
+              <tr style={{ height: '65px' }}>
+                <td style={{ 
+                  padding: '8px',
+                  verticalAlign: 'top'
+                }}>
+                  <div style={{
+                    border: '1px solid #9ca3af',
+                    padding: '8px',
+                    height: '49px',
+                    boxSizing: 'border-box'
+                  }}>
+                    {descriptionPoints.map((point, index) => (
+                      <div key={index} style={{ 
+                        fontSize: '9px',
+                        fontWeight: 'bold',
+                        marginBottom: '2px',
+                        display: 'flex',
+                        alignItems: 'flex-start'
+                      }}>
+                        <span style={{ color: '#dc2626', marginRight: '4px' }}>❖</span>
+                        <span>{point}</span>
+                      </div>
+                    ))}
+                  </div>
+                </td>
+              </tr>
+
+              {/* Price Row */}
+              <tr style={{ height: '35px' }}>
+                <td style={{ 
+                  padding: '8px',
+                  verticalAlign: 'middle'
+                }}>
+                  <div style={{
+                    backgroundColor: '#fde047',
+                    borderRadius: '4px',
+                    padding: '8px',
+                    textAlign: 'center',
+                    fontSize: '11px',
+                    fontWeight: 'bold',
+                    color: '#dc2626'
+                  }}>
+                    RESERVE PRICE: {data.price}
+                  </div>
+                </td>
+              </tr>
+
+              {/* Auction Date Row */}
+              <tr style={{ height: '30px' }}>
+                <td style={{ 
+                  padding: '8px',
+                  verticalAlign: 'middle'
+                }}>
+                  <div style={{
+                    border: '1px solid #3b82f6',
+                    padding: '6px',
+                    textAlign: 'center',
+                    fontSize: '10px',
+                    fontWeight: 'bold',
+                    color: '#3b82f6'
+                  }}>
+                    LAST DATE OF AUCTION: {data.auctionDate}
+                  </div>
+                </td>
+              </tr>
+
+              {/* Contact Row */}
+              <tr style={{ height: '75px' }}>
+                <td style={{ 
+                  padding: '8px',
+                  textAlign: 'center',
+                  verticalAlign: 'middle'
+                }}>
+                  <div style={{ 
+                    fontSize: '16px', 
+                    fontWeight: 'bold', 
+                    color: '#dc2626'
+                  }}>
+                    PH - {data.contact}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         )}
 
         {/* Template 2 - Villa Style */}
         {template.id === 2 && (
-          <div style={{ 
+          <table style={{ 
             width: '270px', 
             height: '480px', 
-            position: 'relative',
-            background: 'linear-gradient(to bottom right, #fed7aa, #fdba74)'
+            background: 'linear-gradient(to bottom right, #fed7aa, #fdba74)',
+            borderCollapse: 'collapse',
+            tableLayout: 'fixed',
+            margin: '0',
+            padding: '0'
           }}>
-            {/* Header */}
-            <div style={{ 
-              position: 'absolute', 
-              top: '0px', 
-              left: '0px', 
-              width: '270px', 
-              height: '50px', 
-              padding: '8px',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{ 
-                position: 'absolute',
-                top: '0px',
-                right: '0px',
-                backgroundColor: '#dc2626',
-                color: 'white',
-                fontSize: '8px',
-                fontWeight: 'bold',
-                padding: '4px 6px',
-                textAlign: 'center'
-              }}>
-                BANK AUCTION PROPERTIES
-              </div>
-              <img 
-                src="/logo.png" 
-                alt="Mars Logo" 
-                style={{ height: '34px', width: '34px', display: 'block' }} 
-              />
-            </div>
-
-            {/* Property Image */}
-            <div style={{
-              position: 'absolute',
-              top: '50px',
-              left: '0px',
-              width: '270px',
-              height: '120px',
-              backgroundColor: '#e5e7eb',
-              overflow: 'hidden'
-            }}>
-              <img 
-                src={image || template.preview} 
-                alt="Property"
-                style={{ 
-                  width: '100%', 
-                  height: '100%', 
-                  objectFit: 'cover',
-                  display: 'block'
-                }}
-              />
-            </div>
-
-            {/* Title Section */}
-            <div style={{
-              position: 'absolute',
-              top: '178px',
-              left: '0px',
-              width: '270px',
-              height: '50px',
-              backgroundColor: '#e5e7eb',
-              color: '#374151',
-              padding: '8px',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{ fontSize: '14px', fontWeight: 'bold', margin: '0', lineHeight: '1.2' }}>
-                {data.title.split(' ')[0]}
-              </div>
-              <div style={{ fontSize: '12px', fontWeight: 'bold', color: '#dc2626', margin: '0', lineHeight: '1.2' }}>
-                {getDynamicTitle()}
-              </div>
-            </div>
-
-            {/* Left Column */}
-            <div style={{ 
-              position: 'absolute', 
-              top: '236px', 
-              left: '8px', 
-              width: '125px', 
-              height: '180px'
-            }}>
-              <div style={{ marginBottom: '12px' }}>
-                <div style={{ fontSize: '9px', fontWeight: 'bold', lineHeight: '1.2' }}>LOCATED AT:</div>
-                <div style={{ fontSize: '9px', lineHeight: '1.2' }}>{data.location}</div>
-              </div>
-              <div style={{ marginBottom: '12px' }}>
-                <div style={{ fontSize: '9px', fontWeight: 'bold', lineHeight: '1.2' }}>TYPE:</div>
-                <div style={{ fontSize: '9px', lineHeight: '1.2' }}>{data.type}</div>
-              </div>
-              <div style={{ fontSize: '11px', fontWeight: 'bold', lineHeight: '1.2' }}>
-                PH NO: {data.contact}
-              </div>
-            </div>
-
-            {/* Right Column */}
-            <div style={{ 
-              position: 'absolute', 
-              top: '236px', 
-              left: '137px', 
-              width: '125px', 
-              height: '180px'
-            }}>
-              <div style={{
-                backgroundColor: '#dc2626',
-                color: 'white',
-                textAlign: 'center',
-                borderRadius: '4px',
-                padding: '6px',
-                marginBottom: '8px'
-              }}>
-                <div style={{ fontSize: '8px', lineHeight: '1.2' }}>RESERVE PRICE</div>
-                <div style={{ fontSize: '10px', fontWeight: 'bold', lineHeight: '1.2' }}>{data.price}</div>
-              </div>
-              
-              <div style={{ marginBottom: '8px' }}>
-                {descriptionPoints.map((point, index) => (
-                  <div key={index} style={{ 
-                    fontSize: '8px', 
-                    marginBottom: '2px',
-                    lineHeight: '1.2'
+            <tbody>
+              {/* Header Row */}
+              <tr style={{ height: '50px' }}>
+                <td style={{ 
+                  padding: '8px',
+                  verticalAlign: 'middle',
+                  position: 'relative'
+                }}>
+                  <div style={{ 
+                    position: 'absolute',
+                    top: '0px',
+                    right: '0px',
+                    backgroundColor: '#dc2626',
+                    color: 'white',
+                    fontSize: '8px',
+                    fontWeight: 'bold',
+                    padding: '4px 6px'
                   }}>
-                    <span style={{ color: '#dc2626' }}>•</span>
-                    <span style={{ fontWeight: 'bold', marginLeft: '2px' }}>{point}</span>
+                    BANK AUCTION PROPERTIES
                   </div>
-                ))}
-              </div>
-              
-              <div style={{ fontSize: '8px', fontWeight: 'bold', lineHeight: '1.2' }}>
-                AUCTION DATE: {data.auctionDate}
-              </div>
-            </div>
-          </div>
+                  <img 
+                    src="/logo.png" 
+                    alt="Mars Logo" 
+                    style={{ height: '34px', width: '34px', display: 'block' }} 
+                  />
+                </td>
+              </tr>
+
+              {/* Image Row */}
+              <tr style={{ height: '120px' }}>
+                <td style={{ padding: '0', backgroundColor: '#e5e7eb' }}>
+                  <img 
+                    src={image || template.preview} 
+                    alt="Property"
+                    style={{ 
+                      width: '270px', 
+                      height: '120px', 
+                      objectFit: 'cover',
+                      display: 'block'
+                    }}
+                  />
+                </td>
+              </tr>
+
+              {/* Title Section Row */}
+              <tr style={{ height: '50px' }}>
+                <td style={{
+                  backgroundColor: '#e5e7eb',
+                  color: '#374151',
+                  padding: '8px',
+                  verticalAlign: 'middle'
+                }}>
+                  <div style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '2px' }}>
+                    {data.title.split(' ')[0]}
+                  </div>
+                  <div style={{ fontSize: '12px', fontWeight: 'bold', color: '#dc2626' }}>
+                    {getDynamicTitle()}
+                  </div>
+                </td>
+              </tr>
+
+              {/* Content Row */}
+              <tr style={{ height: '260px' }}>
+                <td style={{ padding: '8px', verticalAlign: 'top' }}>
+                  <table style={{ width: '100%', height: '100%', borderCollapse: 'collapse' }}>
+                    <tbody>
+                      <tr>
+                        {/* Left Column */}
+                        <td style={{ width: '50%', verticalAlign: 'top', paddingRight: '4px' }}>
+                          <div style={{ marginBottom: '12px' }}>
+                            <div style={{ fontSize: '9px', fontWeight: 'bold' }}>LOCATED AT:</div>
+                            <div style={{ fontSize: '9px' }}>{data.location}</div>
+                          </div>
+                          <div style={{ marginBottom: '12px' }}>
+                            <div style={{ fontSize: '9px', fontWeight: 'bold' }}>TYPE:</div>
+                            <div style={{ fontSize: '9px' }}>{data.type}</div>
+                          </div>
+                          <div style={{ fontSize: '11px', fontWeight: 'bold' }}>
+                            PH NO: {data.contact}
+                          </div>
+                        </td>
+
+                        {/* Right Column */}
+                        <td style={{ width: '50%', verticalAlign: 'top', paddingLeft: '4px' }}>
+                          <div style={{
+                            backgroundColor: '#dc2626',
+                            color: 'white',
+                            textAlign: 'center',
+                            borderRadius: '4px',
+                            padding: '6px',
+                            marginBottom: '8px'
+                          }}>
+                            <div style={{ fontSize: '8px' }}>RESERVE PRICE</div>
+                            <div style={{ fontSize: '10px', fontWeight: 'bold' }}>{data.price}</div>
+                          </div>
+                          
+                          <div style={{ marginBottom: '8px' }}>
+                            {descriptionPoints.map((point, index) => (
+                              <div key={index} style={{ 
+                                fontSize: '8px', 
+                                marginBottom: '2px',
+                                fontWeight: 'bold'
+                              }}>
+                                <span style={{ color: '#dc2626' }}>•</span>
+                                <span style={{ marginLeft: '2px' }}>{point}</span>
+                              </div>
+                            ))}
+                          </div>
+                          
+                          <div style={{ fontSize: '8px', fontWeight: 'bold' }}>
+                            AUCTION DATE: {data.auctionDate}
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         )}
 
         {/* Template 3 - Modern Professional */}
         {template.id === 3 && (
-          <div style={{ 
+          <table style={{ 
             width: '270px', 
             height: '480px', 
-            position: 'relative', 
-            backgroundColor: 'white' 
+            backgroundColor: 'white',
+            borderCollapse: 'collapse',
+            tableLayout: 'fixed',
+            margin: '0',
+            padding: '0'
           }}>
-            {/* Header */}
-            <div style={{
-              position: 'absolute',
-              top: '0px',
-              left: '0px',
-              width: '270px',
-              height: '50px',
-              background: 'linear-gradient(to right, #2563eb, #1e40af)',
-              color: 'white',
-              padding: '8px',
-              boxSizing: 'border-box',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between'
-            }}>
-              <img 
-                src="/logo.png" 
-                alt="Mars Logo" 
-                style={{ height: '34px', width: '34px', display: 'block' }} 
-              />
-              <div style={{ textAlign: 'right' }}>
-                <div style={{ fontSize: '8px', fontWeight: '500', lineHeight: '1.2' }}>PREMIUM PROPERTY</div>
-                <div style={{ fontSize: '7px', opacity: '0.9', lineHeight: '1.2' }}>AUCTION SALE</div>
-              </div>
-            </div>
-
-            {/* Property Image */}
-            <div style={{
-              position: 'absolute',
-              top: '50px',
-              left: '0px',
-              width: '270px',
-              height: '130px',
-              backgroundColor: '#f3f4f6',
-              overflow: 'hidden'
-            }}>
-              <img 
-                src={image || template.preview} 
-                alt="Property"
-                style={{ 
-                  width: '100%', 
-                  height: '100%', 
-                  objectFit: 'cover',
-                  display: 'block'
-                }}
-              />
-            </div>
-
-            {/* Title Section */}
-            <div style={{
-              position: 'absolute',
-              top: '188px',
-              left: '8px',
-              width: '254px',
-              height: '40px',
-              textAlign: 'center',
-              borderBottom: '1px solid #e5e7eb',
-              paddingBottom: '8px',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{ 
-                fontSize: '11px', 
-                fontWeight: 'bold', 
-                color: '#374151', 
-                margin: '0 0 4px 0',
-                lineHeight: '1.2'
-              }}>
-                {data.title}
-              </div>
-              <div style={{
-                backgroundColor: '#dbeafe',
-                color: '#1e40af',
-                borderRadius: '9999px',
-                fontSize: '8px',
-                fontWeight: '500',
-                padding: '2px 8px',
-                display: 'inline-block'
-              }}>
-                {data.type}
-              </div>
-            </div>
-
-            {/* Price Highlight */}
-            <div style={{
-              position: 'absolute',
-              top: '236px',
-              left: '8px',
-              width: '254px',
-              height: '40px',
-              background: 'linear-gradient(to right, #10b981, #059669)',
-              color: 'white',
-              textAlign: 'center',
-              borderRadius: '8px',
-              padding: '8px',
-              boxSizing: 'border-box',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center'
-            }}>
-              <div style={{ fontSize: '8px', opacity: '0.9', lineHeight: '1.2' }}>STARTING PRICE</div>
-              <div style={{ fontSize: '14px', fontWeight: 'bold', lineHeight: '1.2' }}>{data.price}</div>
-            </div>
-
-            {/* Location and Date Grid */}
-            <div style={{ 
-              position: 'absolute', 
-              top: '284px', 
-              left: '8px', 
-              width: '254px', 
-              height: '40px',
-              display: 'flex',
-              gap: '8px'
-            }}>
-              <div style={{
-                backgroundColor: '#f9fafb',
-                borderRadius: '8px',
-                padding: '6px',
-                flex: '1',
-                boxSizing: 'border-box'
-              }}>
-                <div style={{ 
-                  fontSize: '7px', 
-                  color: '#6b7280', 
-                  textTransform: 'uppercase', 
-                  letterSpacing: '0.05em',
-                  lineHeight: '1.2'
+            <tbody>
+              {/* Header Row */}
+              <tr style={{ height: '50px' }}>
+                <td style={{
+                  background: 'linear-gradient(to right, #2563eb, #1e40af)',
+                  color: 'white',
+                  padding: '8px',
+                  verticalAlign: 'middle'
                 }}>
-                  Location
-                </div>
-                <div style={{ 
-                  fontSize: '8px', 
-                  fontWeight: '500', 
-                  color: '#374151', 
-                  marginTop: '2px', 
-                  lineHeight: '1.2' 
-                }}>
-                  {data.location}
-                </div>
-              </div>
-              <div style={{
-                backgroundColor: '#fef2f2',
-                borderRadius: '8px',
-                padding: '6px',
-                flex: '1',
-                boxSizing: 'border-box'
-              }}>
-                <div style={{ 
-                  fontSize: '7px', 
-                  color: '#dc2626', 
-                  textTransform: 'uppercase', 
-                  letterSpacing: '0.05em',
-                  lineHeight: '1.2'
-                }}>
-                  Auction Date
-                </div>
-                <div style={{ 
-                  fontSize: '8px', 
-                  fontWeight: 'bold', 
-                  color: '#b91c1c', 
-                  marginTop: '2px',
-                  lineHeight: '1.2'
-                }}>
-                  {data.auctionDate}
-                </div>
-              </div>
-            </div>
-
-            {/* Features */}
-            <div style={{
-              position: 'absolute',
-              top: '332px',
-              left: '8px',
-              width: '254px',
-              height: '80px',
-              backgroundColor: '#eff6ff',
-              borderRadius: '8px',
-              padding: '8px',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{ 
-                fontSize: '8px', 
-                fontWeight: '600', 
-                color: '#1e40af', 
-                marginBottom: '6px',
-                lineHeight: '1.2'
-              }}>
-                PROPERTY HIGHLIGHTS
-              </div>
-              <div>
-                {descriptionPoints.map((point, index) => (
-                  <div key={index} style={{ 
+                  <div style={{ 
                     display: 'flex', 
-                    alignItems: 'flex-start', 
-                    fontSize: '8px', 
-                    color: '#374151', 
-                    marginBottom: '2px',
-                    lineHeight: '1.3'
+                    alignItems: 'center', 
+                    justifyContent: 'space-between',
+                    height: '34px'
                   }}>
-                    <div style={{
-                      width: '4px',
-                      height: '4px',
-                      backgroundColor: '#3b82f6',
-                      borderRadius: '50%',
-                      marginTop: '4px',
-                      marginRight: '6px',
-                      flexShrink: 0
-                    }}></div>
-                    <span>{point}</span>
+                    <img 
+                      src="/logo.png" 
+                      alt="Mars Logo" 
+                      style={{ height: '34px', width: '34px', display: 'block' }} 
+                    />
+                    <div style={{ textAlign: 'right' }}>
+                      <div style={{ fontSize: '8px', fontWeight: '500' }}>PREMIUM PROPERTY</div>
+                      <div style={{ fontSize: '7px', opacity: '0.9' }}>AUCTION SALE</div>
+                    </div>
                   </div>
-                ))}
-              </div>
-            </div>
+                </td>
+              </tr>
 
-            {/* Contact Section */}
-            <div style={{
-              position: 'absolute',
-              top: '420px',
-              left: '8px',
-              width: '254px',
-              height: '52px',
-              backgroundColor: '#1f2937',
-              color: 'white',
-              textAlign: 'center',
-              borderRadius: '8px',
-              padding: '8px',
-              boxSizing: 'border-box',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center'
-            }}>
-              <div style={{ fontSize: '8px', opacity: '0.9', lineHeight: '1.2' }}>FOR MORE INFORMATION</div>
-              <div style={{ fontSize: '14px', fontWeight: 'bold', marginTop: '2px', lineHeight: '1.2' }}>
-                📞 {data.contact}
-              </div>
-              <div style={{ fontSize: '7px', opacity: '0.75', marginTop: '2px', lineHeight: '1.2' }}>
-                www.marsarcs.com
-              </div>
-            </div>
-          </div>
+              {/* Image Row */}
+              <tr style={{ height: '130px' }}>
+                <td style={{ padding: '0', backgroundColor: '#f3f4f6' }}>
+                  <img 
+                    src={image || template.preview} 
+                    alt="Property"
+                    style={{ 
+                      width: '270px', 
+                      height: '130px', 
+                      objectFit: 'cover',
+                      display: 'block'
+                    }}
+                  />
+                </td>
+              </tr>
+
+              {/* Title Section Row */}
+              <tr style={{ height: '45px' }}>
+                <td style={{
+                  padding: '8px',
+                  textAlign: 'center',
+                  borderBottom: '1px solid #e5e7eb',
+                  verticalAlign: 'middle'
+                }}>
+                  <div style={{ 
+                    fontSize: '11px', 
+                    fontWeight: 'bold', 
+                    color: '#374151', 
+                    marginBottom: '4px'
+                  }}>
+                    {data.title}
+                  </div>
+                  <div style={{
+                    backgroundColor: '#dbeafe',
+                    color: '#1e40af',
+                    borderRadius: '9999px',
+                    fontSize: '8px',
+                    fontWeight: '500',
+                    padding: '2px 8px',
+                    display: 'inline-block'
+                  }}>
+                    {data.type}
+                  </div>
+                </td>
+              </tr>
+
+              {/* Price Row */}
+              <tr style={{ height: '45px' }}>
+                <td style={{ padding: '8px', verticalAlign: 'middle' }}>
+                  <div style={{
+                    background: 'linear-gradient(to right, #10b981, #059669)',
+                    color: 'white',
+                    textAlign: 'center',
+                    borderRadius: '8px',
+                    padding: '8px'
+                  }}>
+                    <div style={{ fontSize: '8px', opacity: '0.9' }}>STARTING PRICE</div>
+                    <div style={{ fontSize: '14px', fontWeight: 'bold' }}>{data.price}</div>
+                  </div>
+                </td>
+              </tr>
+
+              {/* Location and Date Row */}
+              <tr style={{ height: '45px' }}>
+                <td style={{ padding: '8px', verticalAlign: 'middle' }}>
+                  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                    <tbody>
+                      <tr>
+                        <td style={{ width: '50%', paddingRight: '4px' }}>
+                          <div style={{
+                            backgroundColor: '#f9fafb',
+                            borderRadius: '8px',
+                            padding: '6px'
+                          }}>
+                            <div style={{ 
+                              fontSize: '7px', 
+                              color: '#6b7280', 
+                              textTransform: 'uppercase', 
+                              letterSpacing: '0.05em'
+                            }}>
+                              Location
+                            </div>
+                            <div style={{ 
+                              fontSize: '8px', 
+                              fontWeight: '500', 
+                              color: '#374151', 
+                              marginTop: '2px'
+                            }}>
+                              {data.location}
+                            </div>
+                          </div>
+                        </td>
+                        <td style={{ width: '50%', paddingLeft: '4px' }}>
+                          <div style={{
+                            backgroundColor: '#fef2f2',
+                            borderRadius: '8px',
+                            padding: '6px'
+                          }}>
+                            <div style={{ 
+                              fontSize: '7px', 
+                              color: '#dc2626', 
+                              textTransform: 'uppercase', 
+                              letterSpacing: '0.05em'
+                            }}>
+                              Auction Date
+                            </div>
+                            <div style={{ 
+                              fontSize: '8px', 
+                              fontWeight: 'bold', 
+                              color: '#b91c1c', 
+                              marginTop: '2px'
+                            }}>
+                              {data.auctionDate}
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+
+              {/* Features Row */}
+              <tr style={{ height: '85px' }}>
+                <td style={{ padding: '8px', verticalAlign: 'top' }}>
+                  <div style={{
+                    backgroundColor: '#eff6ff',
+                    borderRadius: '8px',
+                    padding: '8px',
+                    height: '69px',
+                    boxSizing: 'border-box'
+                  }}>
+                    <div style={{ 
+                      fontSize: '8px', 
+                      fontWeight: '600', 
+                      color: '#1e40af', 
+                      marginBottom: '6px'
+                    }}>
+                      PROPERTY HIGHLIGHTS
+                    </div>
+                    {descriptionPoints.map((point, index) => (
+                      <div key={index} style={{ 
+                        fontSize: '8px', 
+                        color: '#374151', 
+                        marginBottom: '2px',
+                        display: 'flex',
+                        alignItems: 'flex-start'
+                      }}>
+                        <div style={{
+                          width: '4px',
+                          height: '4px',
+                          backgroundColor: '#3b82f6',
+                          borderRadius: '50%',
+                          marginTop: '4px',
+                          marginRight: '6px',
+                          flexShrink: 0
+                        }}></div>
+                        <span>{point}</span>
+                      </div>
+                    ))}
+                  </div>
+                </td>
+              </tr>
+
+              {/* Contact Row */}
+              <tr style={{ height: '75px' }}>
+                <td style={{ padding: '8px', verticalAlign: 'middle' }}>
+                  <div style={{
+                    backgroundColor: '#1f2937',
+                    color: 'white',
+                    textAlign: 'center',
+                    borderRadius: '8px',
+                    padding: '8px'
+                  }}>
+                    <div style={{ fontSize: '8px', opacity: '0.9' }}>FOR MORE INFORMATION</div>
+                    <div style={{ fontSize: '14px', fontWeight: 'bold', marginTop: '2px' }}>
+                      📞 {data.contact}
+                    </div>
+                    <div style={{ fontSize: '7px', opacity: '0.75', marginTop: '2px' }}>
+                      www.marsarcs.com
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         )}
       </div>
     </div>
