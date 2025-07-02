@@ -141,7 +141,13 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
             {/* Villa For Sale Section */}
             <div className="p-4">
               <div className="bg-gray-600 text-white pt-0 px-4 -mx-4 mb-4 pb-6">
-                <h1 className="text-2xl font-bold italic">{data.title}</h1>
+                <h1 className="text-2xl font-bold italic">{data.title}
+                  <span className='text-red-300'>
+                    {
+                    data.location?.trim() ? ` @${data.location.split(/[\s,]+/)[0]}` : ''
+                    }
+                  </span>
+                </h1>
               </div>
 
               <div className="grid grid-cols-2 gap-4 text-sm">
@@ -205,7 +211,13 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
             <div className="pt-0 px-2 pb-2 space-y-2">
               {/* Title Section */}
               <div className="text-center border-b border-gray-200 pb-1">
-                <h1 className="text-xl font-bold text-gray-800 mb-2">{data.title}</h1>
+                <h1 className="text-xl font-bold text-gray-800 mb-2">{data.title}
+                  <span className='text-red-500'>
+                    {
+                    data.location?.trim() ? ` @${data.location.split(/[\s,]+/)[0]}` : ''
+                    }
+                  </span>
+                </h1>
                 <div className="bg-blue-100 text-blue-800 px-3 pt-0 pb-3 rounded-full text-sm font-medium inline-block">
                   {data.type}
                 </div>
