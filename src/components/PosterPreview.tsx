@@ -59,7 +59,13 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
             <div className="pt-1 px-3 space-y-2">
               <div className="text-center">
                 <h2 className="text-lg font-bold text-black flex items-center justify-center gap-2">
-                  <span className="text-red-600">❖</span> {data.title}
+                  <span className="text-red-600">❖</span> 
+                  {data.title}
+                  <span className='text-blue-500'>
+                    {
+                    data.location?.trim() ? ` @${data.location.split(/[\s,]+/)[0]}` : ''
+                    }
+                  </span>
                 </h2>
               </div>
 
@@ -93,8 +99,8 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
               </div>
 
               {/* Reserve Price */}
-              <div className="text-center bg-yellow-300 pt-0 pb-3 rounded">
-                <div className="font-bold text-lg text-red-600">RESERVE PRICE: {data.price}</div>
+              <div className="text-center bg-blue-300 pt-0 pb-3 rounded">
+                <div className="font-bold text-lg text-black-600">RESERVE PRICE: {data.price}</div>
               </div>
 
               {/* Auction Date */}
