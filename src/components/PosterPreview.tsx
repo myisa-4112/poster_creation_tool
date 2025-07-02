@@ -25,474 +25,146 @@ interface PosterPreviewProps {
 }
 
 const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) => {
-  // Fixed 3 description points
-  const getFixedDescriptionPoints = () => {
-    const points = data.description.split('\n').filter(point => point.trim() !== '');
-    const fixedPoints = [
-      points[0] || 'Beautiful property with modern amenities',
-      points[1] || 'Prime location with excellent connectivity', 
-      points[2] || 'Ready to move condition'
-    ];
-    return fixedPoints;
-  };
-
-  const descriptionPoints = getFixedDescriptionPoints();
-
-  // Dynamic title detection for template 2
-  const getDynamicTitle = () => {
-    const title = data.title.toUpperCase();
-    if (title.includes('SALE')) return 'FOR SALE';
-    if (title.includes('RENT')) return 'FOR RENT';
-    if (title.includes('AUCTION')) return 'FOR AUCTION';
-    return 'AVAILABLE';
-  };
+  // Split description into bullet points
+  const descriptionPoints = data.description.split('\n').filter(point => point.trim() !== '');
 
   return (
-    <div style={{
-      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-      backdropFilter: 'blur(8px)',
-      borderRadius: '8px',
-      padding: '24px'
-    }}>
-      <h3 style={{
-        fontSize: '20px',
-        fontWeight: 'bold',
-        color: 'white',
-        marginBottom: '16px',
-        margin: '0 0 16px 0'
-      }}>Live Preview</h3>
+    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+      <h3 className="text-xl font-bold text-white mb-4">Live Preview</h3>
       
-      <div 
-        id="poster-content" 
-        style={{ 
-          width: '270px', 
-          height: '480px',
-          backgroundColor: '#ffffff',
-          borderRadius: '8px',
-          overflow: 'hidden',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-          margin: '0 auto',
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '12px',
-          lineHeight: '1.2',
-          position: 'relative',
-          border: 'none',
-          outline: 'none'
-        }}
-      >
-        {/* Template 1 - Bank Auction Properties */}
+      <div id="poster-content" className="bg-white rounded-lg overflow-hidden shadow-2xl max-w-md mx-auto">
+        {/* Template 1 - Bank Auction Properties (List Style) */}
         {template.id === 1 && (
-          <div style={{ 
-            width: '270px', 
-            height: '480px', 
-            backgroundColor: '#ffffff',
-            position: 'relative',
-            overflow: 'hidden'
-          }}>
+          <div className="relative">
             {/* Header */}
-            <div style={{ 
-              height: '50px',
-              backgroundColor: '#ffffff',
-              padding: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              boxSizing: 'border-box'
-            }}>
-              <img 
-                src="/logo.png" 
-                alt="Mars Logo" 
-                style={{ 
-                  height: '34px', 
-                  width: '34px', 
-                  display: 'block',
-                  objectFit: 'contain'
-                }} 
-              />
-              <div style={{ 
-                backgroundColor: '#dc2626',
-                color: '#ffffff',
-                fontSize: '8px',
-                fontWeight: 'bold',
-                padding: '4px 6px',
-                whiteSpace: 'nowrap',
-                lineHeight: '1'
-              }}>
+            <div className="bg-white p-1 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <img src="/logo.png" alt="Mars Logo" className="h-12 w-12" />
+              </div>
+              <div className="bg-red-600 text-white pt-0 pb-3 px-2 rounded text-sm font-bold ">
                 BANK AUCTION PROPERTIES
               </div>
             </div>
 
-            {/* Image */}
-            <div style={{ 
-              height: '120px',
-              backgroundColor: '#e5e7eb',
-              overflow: 'hidden'
-            }}>
+            {/* Property Image */}
+            <div className="h-52 bg-gray-200 overflow-hidden">
               <img 
                 src={image || template.preview} 
                 alt="Property"
-                style={{ 
-                  width: '270px', 
-                  height: '120px', 
-                  objectFit: 'cover',
-                  display: 'block',
-                  border: 'none'
-                }}
+                className="w-full h-full object-cover"
               />
             </div>
 
-            {/* Title */}
-            <div style={{ 
-              height: '25px',
-              padding: '8px',
-              textAlign: 'center',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{ 
-                fontSize: '11px', 
-                fontWeight: 'bold', 
-                color: '#000000',
-                lineHeight: '1'
-              }}>
-                <span style={{ color: '#dc2626', marginRight: '4px' }}>❖</span>
-                {data.title}
+            {/* Content */}
+            <div className="pt-1 px-3 space-y-2">
+              <div className="text-center">
+                <h2 className="text-lg font-bold text-black flex items-center justify-center gap-2">
+                  <span className="text-red-600">❖</span> {data.title}
+                </h2>
               </div>
-            </div>
 
-            {/* Property Type */}
-            <div style={{ 
-              height: '20px',
-              padding: '0 8px',
-              display: 'flex',
-              alignItems: 'flex-start',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{ 
-                fontSize: '10px', 
-                display: 'flex', 
-                alignItems: 'flex-start',
-                lineHeight: '1'
-              }}>
-                <span style={{ color: '#dc2626', marginRight: '4px' }}>❖</span>
-                <div>
-                  <span style={{ fontWeight: 'bold' }}>PROPERTY TYPE:</span>
-                  <span style={{ 
-                    color: '#dc2626', 
-                    fontWeight: 'bold', 
-                    marginLeft: '4px' 
-                  }}>{data.type}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Location */}
-            <div style={{ 
-              height: '30px',
-              padding: '0 8px',
-              display: 'flex',
-              alignItems: 'flex-start',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{ 
-                fontSize: '10px', 
-                display: 'flex', 
-                alignItems: 'flex-start',
-                lineHeight: '1.1'
-              }}>
-                <span style={{ color: '#dc2626', marginRight: '4px' }}>❖</span>
-                <div>
-                  <div style={{ fontWeight: 'bold', marginBottom: '2px' }}>PROPERTY LOCATION:</div>
-                  <div style={{ color: '#dc2626', fontWeight: 'bold' }}>{data.location}</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Description */}
-            <div style={{ 
-              height: '65px',
-              padding: '8px',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{
-                border: '1px solid #9ca3af',
-                padding: '8px',
-                height: '49px',
-                boxSizing: 'border-box',
-                overflow: 'hidden'
-              }}>
-                {descriptionPoints.map((point, index) => (
-                  <div key={index} style={{ 
-                    fontSize: '9px',
-                    fontWeight: 'bold',
-                    marginBottom: '2px',
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    lineHeight: '1.1'
-                  }}>
-                    <span style={{ color: '#dc2626', marginRight: '4px' }}>❖</span>
-                    <span>{point}</span>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-start gap-2">
+                  <span className="text-red-600">❖</span>
+                  <div>
+                    <strong>PROPERTY TYPE: </strong> <span className="text-red-600 font-bold">{data.type}</span>
                   </div>
-                ))}
-              </div>
-            </div>
+                </div>
 
-            {/* Price */}
-            <div style={{ 
-              height: '35px',
-              padding: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{
-                backgroundColor: '#fde047',
-                borderRadius: '4px',
-                padding: '8px',
-                textAlign: 'center',
-                fontSize: '11px',
-                fontWeight: 'bold',
-                color: '#dc2626',
-                width: '100%',
-                boxSizing: 'border-box',
-                lineHeight: '1'
-              }}>
-                RESERVE PRICE: {data.price}
-              </div>
-            </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-red-600">❖</span>
+                  <div>
+                    <strong>PROPERTY LOCATION: </strong>
+                    <span className="text-red-600 font-bold">{data.location}</span>
+                  </div>
+                </div>
 
-            {/* Auction Date */}
-            <div style={{ 
-              height: '30px',
-              padding: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{
-                border: '1px solid #3b82f6',
-                padding: '6px',
-                textAlign: 'center',
-                fontSize: '10px',
-                fontWeight: 'bold',
-                color: '#3b82f6',
-                width: '100%',
-                boxSizing: 'border-box',
-                lineHeight: '1'
-              }}>
-                LAST DATE OF AUCTION: {data.auctionDate}
+                {/* Description Points */}
+                {descriptionPoints.length > 0 && (
+                  <div className="border border-gray-400 rounded pt-0 px-3 pb-4 space-y-1 text-sm">
+                    {descriptionPoints.map((point, index) => (
+                      <div key={index} className="flex items-start gap-2">
+                        <span className="text-red-600">❖</span>
+                        <span><strong>{point}</strong></span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
-            </div>
 
-            {/* Contact */}
-            <div style={{ 
-              height: '75px',
-              padding: '8px',
-              textAlign: 'center',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{ 
-                fontSize: '16px', 
-                fontWeight: 'bold', 
-                color: '#dc2626',
-                lineHeight: '1'
-              }}>
-                PH - {data.contact}
+              {/* Reserve Price */}
+              <div className="text-center bg-yellow-300 pt-0 pb-3 rounded">
+                <div className="font-bold text-lg text-red-600">RESERVE PRICE: {data.price}</div>
+              </div>
+
+              {/* Auction Date */}
+              <div className="text-center border border-blue-500 pt-0 pb-3 rounded">
+                <div className="text-blue-600 font-bold text-lg">LAST DATE OF AUCTION: {data.auctionDate}</div>
+              </div>
+
+              {/* Contact Numbers */}
+              <div className="text-center">
+                <div className="text-red-600 font-bold text-xl pt-0 pb-3">PH - {data.contact}</div>
               </div>
             </div>
           </div>
         )}
 
-        {/* Template 2 - Villa Style */}
+        {/* Template 2 - Villa For Sale (Multi-image Style) */}
         {template.id === 2 && (
-          <div style={{ 
-            width: '270px', 
-            height: '480px', 
-            background: 'linear-gradient(135deg, #fed7aa 0%, #fdba74 100%)',
-            position: 'relative',
-            overflow: 'hidden'
-          }}>
-            {/* Header */}
-            <div style={{ 
-              height: '50px',
-              padding: '8px',
-              position: 'relative',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{ 
-                position: 'absolute',
-                top: '0px',
-                right: '0px',
-                backgroundColor: '#dc2626',
-                color: '#ffffff',
-                fontSize: '8px',
-                fontWeight: 'bold',
-                padding: '4px 6px',
-                lineHeight: '1'
-              }}>
+          <div className="relative bg-gradient-to-br from-orange-100 to-orange-200 pt-1">
+            {/* Header with Logo */}
+            <div className="relative pt-0 pl-2">
+              <div className="absolute top-0 right-0 bg-red-600 text-white pt-0 px-2 pb-3 font-bold rounded">
                 BANK AUCTION PROPERTIES
               </div>
-              <img 
-                src="/logo.png" 
-                alt="Mars Logo" 
-                style={{ 
-                  height: '34px', 
-                  width: '34px', 
-                  display: 'block',
-                  objectFit: 'contain'
-                }} 
-              />
+              <div className="flex items-center gap-2">
+                <img src="/logo.png" alt="Mars Logo" className="h-12 w-12" />
+              </div>
             </div>
 
-            {/* Image */}
-            <div style={{ 
-              height: '120px',
-              backgroundColor: '#e5e7eb',
-              overflow: 'hidden'
-            }}>
+            {/* Main Property Image */}
+            <div className="h-48 bg-gray-200 overflow-hidden relative">
               <img 
                 src={image || template.preview} 
                 alt="Property"
-                style={{ 
-                  width: '270px', 
-                  height: '120px', 
-                  objectFit: 'cover',
-                  display: 'block',
-                  border: 'none'
-                }}
+                className="w-full h-full object-cover"
               />
             </div>
 
-            {/* Title Section */}
-            <div style={{
-              height: '50px',
-              backgroundColor: '#000000',
-              color: '#ffffff',
-              padding: '8px',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{ 
-                fontSize: '14px', 
-                fontWeight: 'bold', 
-                marginBottom: '2px',
-                fontStyle: 'italic',
-                lineHeight: '1'
-              }}>
-                {data.title.split(' ')[0]}
+            {/* Villa For Sale Section */}
+            <div className="p-4">
+              <div className="bg-gray-600 text-white pt-0 px-4 -mx-4 mb-4 pb-6">
+                <h1 className="text-2xl font-bold italic">{data.title}</h1>
               </div>
-              <div style={{ 
-                fontSize: '12px', 
-                fontWeight: 'bold', 
-                color: '#dc2626',
-                fontStyle: 'italic',
-                lineHeight: '1'
-              }}>
-                {getDynamicTitle()}
-              </div>
-            </div>
 
-            {/* Content */}
-            <div style={{ 
-              height: '260px',
-              padding: '8px',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{ 
-                display: 'flex', 
-                height: '100%'
-              }}>
-                {/* Left Column */}
-                <div style={{ 
-                  width: '50%', 
-                  paddingRight: '4px',
-                  display: 'flex',
-                  flexDirection: 'column'
-                }}>
-                  <div style={{ marginBottom: '12px' }}>
-                    <div style={{ 
-                      fontSize: '9px', 
-                      fontWeight: 'bold',
-                      lineHeight: '1.1'
-                    }}>LOCATED AT:</div>
-                    <div style={{ 
-                      fontSize: '9px',
-                      lineHeight: '1.1'
-                    }}>{data.location}</div>
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <div className="mb-3">
+                    <strong>LOCATED AT: </strong><span className='font-semibold text-red-600/100 dark:text-sky-400/100'>{data.location}</span>
                   </div>
-                  <div style={{ marginBottom: '12px' }}>
-                    <div style={{ 
-                      fontSize: '9px', 
-                      fontWeight: 'bold',
-                      lineHeight: '1.1'
-                    }}>TYPE:</div>
-                    <div style={{ 
-                      fontSize: '9px',
-                      lineHeight: '1.1'
-                    }}>{data.type}</div>
+                  <div className="mb-3">
+                    <strong>TYPE:</strong> <span className='font-semibold text-red-600/100 dark:text-sky-400/100'>{data.type}</span>
                   </div>
-                  <div style={{ 
-                    fontSize: '11px', 
-                    fontWeight: 'bold',
-                    lineHeight: '1'
-                  }}>
+                  <div className="text-xl font-bold">
                     PH NO: {data.contact}
                   </div>
                 </div>
 
-                {/* Right Column */}
-                <div style={{ 
-                  width: '50%', 
-                  paddingLeft: '4px',
-                  display: 'flex',
-                  flexDirection: 'column'
-                }}>
-                  <div style={{
-                    backgroundColor: '#dc2626',
-                    color: '#ffffff',
-                    textAlign: 'center',
-                    borderRadius: '4px',
-                    padding: '6px',
-                    marginBottom: '8px'
-                  }}>
-                    <div style={{ 
-                      fontSize: '8px',
-                      lineHeight: '1'
-                    }}>RESERVE PRICE</div>
-                    <div style={{ 
-                      fontSize: '10px', 
-                      fontWeight: 'bold',
-                      lineHeight: '1'
-                    }}>{data.price}</div>
+                <div>
+                  <div className="bg-red-600 text-white pt-0 pb-4 rounded mb-2 text-center">
+                    <div className="text-sm">RESERVE PRICE</div>
+                    <div className="text-lg font-bold">{data.price}</div>
                   </div>
                   
-                  <div style={{ marginBottom: '8px' }}>
+                  <div className="space-y-1 text-xs">
                     {descriptionPoints.map((point, index) => (
-                      <div key={index} style={{ 
-                        fontSize: '8px', 
-                        marginBottom: '2px',
-                        fontWeight: 'bold',
-                        lineHeight: '1.1'
-                      }}>
-                        <span style={{ color: '#dc2626' }}>•</span>
-                        <span style={{ marginLeft: '2px' }}>{point}</span>
-                      </div>
+                      <div key={index}><span className="text-red-600">•</span> <strong>{point}</strong></div>
                     ))}
                   </div>
                   
-                  <div style={{ 
-                    fontSize: '8px', 
-                    fontWeight: 'bold',
-                    lineHeight: '1'
-                  }}>
-                    AUCTION DATE: {data.auctionDate}
+                  <div className="mt-2 mb-3 text-xs">
+                    <strong>AUCTION DATE: {data.auctionDate}</strong>
                   </div>
                 </div>
               </div>
@@ -500,290 +172,79 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
           </div>
         )}
 
-        {/* Template 3 - Modern Professional */}
+        {/* Template 3 - Clean Professional Design */}
         {template.id === 3 && (
-          <div style={{ 
-            width: '270px', 
-            height: '480px', 
-            backgroundColor: '#ffffff',
-            position: 'relative',
-            overflow: 'hidden'
-          }}>
+          <div className="relative bg-white">
             {/* Header */}
-            <div style={{
-              height: '50px',
-              background: 'linear-gradient(90deg, #2563eb 0%, #1e40af 100%)',
-              color: '#ffffff',
-              padding: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              boxSizing: 'border-box'
-            }}>
-              <img 
-                src="/logo.png" 
-                alt="Mars Logo" 
-                style={{ 
-                  height: '34px', 
-                  width: '34px', 
-                  display: 'block',
-                  objectFit: 'contain'
-                }} 
-              />
-              <div style={{ textAlign: 'right' }}>
-                <div style={{ 
-                  fontSize: '8px', 
-                  fontWeight: '500',
-                  lineHeight: '1'
-                }}>PREMIUM PROPERTY</div>
-                <div style={{ 
-                  fontSize: '7px', 
-                  opacity: '0.9',
-                  lineHeight: '1'
-                }}>AUCTION SALE</div>
+            <div className="bg-gradient-to-r from-blue-300 to-blue-600 text-white px-4 pb-4 pt-1">
+              <div className="flex items-center justify-between">
+                <img src="/logo.png" alt="Mars Logo" className="h-12 w-12" />
+                <div className="text-right">
+                  <div className="text-sm font-medium">PREMIUM PROPERTY</div>
+                  <div className="text-xs opacity-90">AUCTION SALE</div>
+                </div>
               </div>
             </div>
 
-            {/* Image */}
-            <div style={{ 
-              height: '130px',
-              backgroundColor: '#f3f4f6',
-              overflow: 'hidden'
-            }}>
+            {/* Property Image - Full width, clear display */}
+            <div className="h-52 bg-gray-100 overflow-hidden">
               <img 
                 src={image || template.preview} 
                 alt="Property"
-                style={{ 
-                  width: '270px', 
-                  height: '130px', 
-                  objectFit: 'cover',
-                  display: 'block',
-                  border: 'none'
-                }}
+                className="w-full h-full object-cover"
               />
             </div>
 
-            {/* Title Section */}
-            <div style={{
-              height: '45px',
-              padding: '8px',
-              textAlign: 'center',
-              borderBottom: '1px solid #e5e7eb',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{ 
-                fontSize: '11px', 
-                fontWeight: 'bold', 
-                color: '#374151', 
-                marginBottom: '4px',
-                lineHeight: '1'
-              }}>
-                {data.title}
+            {/* Main Content */}
+            <div className="pt-0 px-2 pb-2 space-y-2">
+              {/* Title Section */}
+              <div className="text-center border-b border-gray-200 pb-1">
+                <h1 className="text-xl font-bold text-gray-800 mb-2">{data.title}</h1>
+                <div className="bg-blue-100 text-blue-800 px-3 pt-0 pb-3 rounded-full text-sm font-medium inline-block">
+                  {data.type}
+                </div>
               </div>
-              <div style={{
-                backgroundColor: '#dbeafe',
-                color: '#1e40af',
-                borderRadius: '9999px',
-                fontSize: '8px',
-                fontWeight: '500',
-                padding: '2px 8px',
-                display: 'inline-block',
-                lineHeight: '1'
-              }}>
-                {data.type}
-              </div>
-            </div>
 
-            {/* Price */}
-            <div style={{ 
-              height: '45px',
-              padding: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{
-                background: 'linear-gradient(90deg, #10b981 0%, #059669 100%)',
-                color: '#ffffff',
-                textAlign: 'center',
-                borderRadius: '8px',
-                padding: '8px',
-                width: '100%',
-                boxSizing: 'border-box'
-              }}>
-                <div style={{ 
-                  fontSize: '8px', 
-                  opacity: '0.9',
-                  lineHeight: '1'
-                }}>STARTING PRICE</div>
-                <div style={{ 
-                  fontSize: '14px', 
-                  fontWeight: 'bold',
-                  lineHeight: '1'
-                }}>{data.price}</div>
+              {/* Price Highlight */}
+              <div className="bg-gradient-to-r from-green-500 to-green-600 text-white pt-0 px-4 pb-5 rounded-lg text-center">
+                <div className="text-sm opacity-90">STARTING PRICE</div>
+                <div className="text-xl font-bold">{data.price}</div>
               </div>
-            </div>
 
-            {/* Location and Date */}
-            <div style={{ 
-              height: '45px',
-              padding: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{ 
-                display: 'flex', 
-                width: '100%',
-                gap: '8px'
-              }}>
-                <div style={{ width: '50%' }}>
-                  <div style={{
-                    backgroundColor: '#f9fafb',
-                    borderRadius: '8px',
-                    padding: '6px',
-                    height: '29px',
-                    boxSizing: 'border-box'
-                  }}>
-                    <div style={{ 
-                      fontSize: '7px', 
-                      color: '#6b7280', 
-                      textTransform: 'uppercase', 
-                      letterSpacing: '0.05em',
-                      lineHeight: '1'
-                    }}>
-                      Location
-                    </div>
-                    <div style={{ 
-                      fontSize: '8px', 
-                      fontWeight: '500', 
-                      color: '#374151', 
-                      marginTop: '2px',
-                      lineHeight: '1.1'
-                    }}>
-                      {data.location}
-                    </div>
+              {/* Property Details Grid */}
+              <div className="grid grid-cols-2 gap-3">
+                {/* Location */}
+                <div className="bg-gray-50 pt-0 px-2 pt-0 pb-3 rounded-lg">
+                  <div className="text-xs text-gray-600 uppercase tracking-wide">Location</div>
+                  <div className="text-sm font-medium text-gray-800 mt-1">{data.location}</div>
+                </div>
+
+                {/* Auction Date */}
+                <div className="bg-red-50 pt-0 px-2 rounded-lg">
+                  <div className="text-xs text-red-600 uppercase tracking-wide">Auction Date</div>
+                  <div className="text-sm font-bold text-red-700 mt-1">{data.auctionDate}</div>
+                </div>
+              </div>
+
+              {/* Features */}
+              {descriptionPoints.length > 0 && (
+                <div className="bg-blue-50 pt-0 px-2 pb-2 rounded-lg">
+                  <div className="text-sm font-semibold text-blue-800 mb-1">PROPERTY HIGHLIGHTS</div>
+                  <div className="space-y-0 mb-4">
+                    {descriptionPoints.map((point, index) => (
+                      <div key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                        <span className="text-red-600">❖</span><span>{point}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <div style={{ width: '50%' }}>
-                  <div style={{
-                    backgroundColor: '#fef2f2',
-                    borderRadius: '8px',
-                    padding: '6px',
-                    height: '29px',
-                    boxSizing: 'border-box'
-                  }}>
-                    <div style={{ 
-                      fontSize: '7px', 
-                      color: '#dc2626', 
-                      textTransform: 'uppercase', 
-                      letterSpacing: '0.05em',
-                      lineHeight: '1'
-                    }}>
-                      Auction Date
-                    </div>
-                    <div style={{ 
-                      fontSize: '8px', 
-                      fontWeight: 'bold', 
-                      color: '#b91c1c', 
-                      marginTop: '2px',
-                      lineHeight: '1'
-                    }}>
-                      {data.auctionDate}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              )}
 
-            {/* Features */}
-            <div style={{ 
-              height: '85px',
-              padding: '8px',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{
-                backgroundColor: '#eff6ff',
-                borderRadius: '8px',
-                padding: '8px',
-                height: '69px',
-                boxSizing: 'border-box',
-                overflow: 'hidden'
-              }}>
-                <div style={{ 
-                  fontSize: '8px', 
-                  fontWeight: '600', 
-                  color: '#1e40af', 
-                  marginBottom: '6px',
-                  lineHeight: '1'
-                }}>
-                  PROPERTY HIGHLIGHTS
-                </div>
-                {descriptionPoints.map((point, index) => (
-                  <div key={index} style={{ 
-                    fontSize: '8px', 
-                    color: '#374151', 
-                    marginBottom: '2px',
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    lineHeight: '1.1'
-                  }}>
-                    <div style={{
-                      width: '4px',
-                      height: '4px',
-                      backgroundColor: '#3b82f6',
-                      borderRadius: '50%',
-                      marginTop: '4px',
-                      marginRight: '6px',
-                      flexShrink: 0
-                    }}></div>
-                    <span>{point}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Contact */}
-            <div style={{ 
-              height: '75px',
-              padding: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              boxSizing: 'border-box'
-            }}>
-              <div style={{
-                backgroundColor: '#1f2937',
-                color: '#ffffff',
-                textAlign: 'center',
-                borderRadius: '8px',
-                padding: '8px',
-                width: '100%',
-                boxSizing: 'border-box'
-              }}>
-                <div style={{ 
-                  fontSize: '8px', 
-                  opacity: '0.9',
-                  lineHeight: '1'
-                }}>FOR MORE INFORMATION</div>
-                <div style={{ 
-                  fontSize: '14px', 
-                  fontWeight: 'bold', 
-                  marginTop: '2px',
-                  lineHeight: '1'
-                }}>
-                  📞 {data.contact}
-                </div>
-                <div style={{ 
-                  fontSize: '7px', 
-                  opacity: '0.75', 
-                  marginTop: '2px',
-                  lineHeight: '1'
-                }}>
-                  www.marsarcs.com
-                </div>
+              {/* Contact Section */}
+              <div className="bg-gray-800 text-white pt-0 pb-4 rounded text-center">
+                <div className="text-sm opacity-90">FOR MORE INFORMATION</div>
+                <div className="text-sm font-bold mt-0">📞 {data.contact}</div>
+                <div className="text-xs opacity-75 mt-0">www.marsarcs.com</div>
               </div>
             </div>
           </div>
