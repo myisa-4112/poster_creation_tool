@@ -41,7 +41,7 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
               <div className="flex items-center gap-2">
                 <img src="/logo.png" alt="Mars Logo" className="h-12 w-12" />
               </div>
-              <div className="bg-red-600 text-white pt-0 pb-3 px-2 rounded text-sm font-bold ">
+              <div className="text-red-600 pt-0 pb-3 px-2 rounded text-base font-bold ">
                 BANK AUCTION PROPERTIES
               </div>
             </div>
@@ -59,7 +59,7 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
             <div className="pt-1 px-3 space-y-2">
               <div className="text-center">
                 <h2 className="text-lg font-bold text-black flex items-center justify-center gap-2">
-                  <span className="text-red-600">❖</span> 
+                  {/* <span className="text-red-600">❖</span>  */}
                   {data.title}
                   <span className='text-blue-500'>
                     {
@@ -70,15 +70,15 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
               </div>
 
               <div className="space-y-2 text-sm">
-                <div className="flex items-start gap-2">
-                  <span className="text-red-600">❖</span>
+                <div className="flex items-start gap-2 ml-2">
+                  {/* <span className="text-red-600">❖</span> */}
                   <div>
                     <strong>PROPERTY TYPE: </strong> <span className="text-red-600 font-bold">{data.type}</span>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-2">
-                  <span className="text-red-600">❖</span>
+                <div className="flex items-start gap-2 ml-2">
+                  {/* <span className="text-red-600">❖</span> */}
                   <div>
                     <strong>PROPERTY LOCATION: </strong>
                     <span className="text-red-600 font-bold">{data.location}</span>
@@ -121,7 +121,7 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
           <div className="relative bg-gradient-to-br from-orange-100 to-orange-200 pt-1">
             {/* Header with Logo */}
             <div className="relative pt-0 pl-2">
-              <div className="absolute top-0 right-0 bg-red-600 text-white pt-0 px-2 pb-3 font-bold rounded">
+              <div className="absolute top-0 right-0 text-black pt-0 px-2 pb-3 font-bold text-base rounded">
                 BANK AUCTION PROPERTIES
               </div>
               <div className="flex items-center gap-2">
@@ -158,13 +158,16 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
                   <div className="mb-3">
                     <strong>TYPE:</strong> <span className='font-semibold text-red-600/100 dark:text-sky-400/100'>{data.type}</span>
                   </div>
+                  <div className="mb-3">
+                    <strong>AUCTION DATE:</strong> <span className='font-bold text-base text-red-600/100 dark:text-sky-400/100'>{data.auctionDate}</span>
+                  </div>
                   <div className="text-xl font-bold">
                     PH NO: {data.contact}
                   </div>
                 </div>
 
                 <div>
-                  <div className="bg-red-600 text-white pt-0 pb-4 rounded mb-2 text-center">
+                  <div className="bg-gray-600 text-white pt-0 pb-4 rounded mb-2 text-center">
                     <div className="text-sm">RESERVE PRICE</div>
                     <div className="text-lg font-bold">{data.price}</div>
                   </div>
@@ -175,9 +178,7 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
                     ))}
                   </div>
                   
-                  <div className="mt-2 mb-3 text-xs">
-                    <strong>AUCTION DATE: {data.auctionDate}</strong>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -232,7 +233,7 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
               {/* Property Details Grid */}
               <div className="grid grid-cols-2 gap-3">
                 {/* Location */}
-                <div className="bg-gray-50 pt-0 px-2 pt-0 pb-3 rounded-lg">
+                <div className="bg-gray-50 pt-0 px-2 pb-3 rounded-lg">
                   <div className="text-xs text-gray-600 uppercase tracking-wide">Location</div>
                   <div className="text-sm font-medium text-gray-800 mt-1">{data.location}</div>
                 </div>
@@ -240,7 +241,7 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
                 {/* Auction Date */}
                 <div className="bg-red-50 pt-0 px-2 rounded-lg">
                   <div className="text-xs text-red-600 uppercase tracking-wide">Auction Date</div>
-                  <div className="text-sm font-bold text-red-700 mt-1">{data.auctionDate}</div>
+                  <div className="text-semi font-bold text-red-700 mt-1">{data.auctionDate}</div>
                 </div>
               </div>
 
