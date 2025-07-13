@@ -28,6 +28,19 @@ const Index = () => {
       preview: "/images/flat.jpg",
       type: "modern",
       features: ["Clean Design", "Clear Image Display", "Professional Layout", "Easy to Read"]
+    },
+    {
+      id: 4,
+      name: "Arihant Associates Style",
+      preview: "/images/flat-img.jpg",
+      type: "real estate",
+      features: [
+        "Prominent Price Highlight",
+        "Contact & Website Info",
+        "Modern Apartment Image",
+        "Parking Icon",
+        "Detailed Area & UDS Info"
+      ]
     }
   ];
 
