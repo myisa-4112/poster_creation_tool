@@ -268,6 +268,55 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
             </div>
           </div>
         )}
+
+        {/* Template 4 - Modern Real Estate Style (using flat-img.jpg as reference) */}
+        {template.id === 4 && (
+          <div className="relative bg-gradient-to-br from-gray-50 to-gray-200 border-2 border-blue-400 rounded-lg overflow-hidden shadow-2xl">
+            {/* Top: Price Highlight */}
+            <div className="absolute left-4 top-2 bg-blue-500 text-white rounded-full pt-0 pb-4 px-4 shadow-lg border-2 border-white z-20 text-xl font-bold">
+              {data.price || '2 Crore Only'}
+            </div>
+
+            {/* Property Image */}
+            <div className="h-56 bg-gray-200 overflow-hidden flex items-center justify-center">
+              <img 
+                src={image || '/images/flat-img.jpg'} 
+                alt="Property"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Main Info Section */}
+            <div className="pt-0 pb-6 px-6">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                <div className="text-2xl font-extrabold text-blue-900">{data.title || '3 BHK FLAT'}</div>
+                <div className="text-lg font-semibold text-gray-700 mt-2 md:mt-0">@ {data.location || 'ADYAR (Gandhi Nagar)'}</div>
+              </div>
+              <div className="flex flex-wrap gap-4 mb-4">
+                <div className="bg-blue-100 text-blue-800 pt-0 pb-3 px-4 rounded font-bold text-sm">{data.type || 'New Apartment'}</div>
+                <div className="bg-green-100 text-green-800 px-4 pt-0 pb-3 px-4 rounded font-bold text-sm">First Occupation</div>
+                <div className="bg-yellow-100 text-yellow-800 pt-0 pb-3 px-4 rounded font-bold text-sm">Parking Available</div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div className="bg-white border border-gray-200 rounded-lg pt-0 pb-3 px-4 text-center">
+                  <div className="text-xs text-gray-500">BUILTUP AREA</div>
+                  <div className="text-lg font-bold text-blue-900">{descriptionPoints[0] || '2129 Sq.ft'}</div>
+                </div>
+                <div className="bg-white border border-gray-200 rounded-lg pt-0 pb-3 px-4 text-center">
+                  <div className="text-xs text-gray-500">UDS</div>
+                  <div className="text-lg font-bold text-blue-900">{descriptionPoints[1] || '1002 Sq.ft'}</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 mt-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7 text-blue-700">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-1.5-1.5v-9a1.5 1.5 0 011.5-1.5h7.5a1.5 1.5 0 011.5 1.5v9a1.5 1.5 0 01-1.5 1.5m-7.5 0h7.5m-7.5 0v1.5a1.5 1.5 0 001.5 1.5h4.5a1.5 1.5 0 001.5-1.5v-1.5" />
+                </svg>
+                <span className="text-blue-900 font-bold text-md pt-0 pb-3">Parking</span>
+                <span className="ml-auto text-gray-700 font-semibold">Contact: {data.contact}</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
