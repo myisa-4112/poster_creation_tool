@@ -271,56 +271,57 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
 
         {/* Template 4 - Modern Real Estate Style (using flat-img.jpg as reference) */}
         {template.id === 4 && (
-          <div className="bg-white p-4 flex flex-col items-center border-b w-full">
+          <div className="bg-white p-4 flex flex-col items-center w-full min-h-[600px]">
             {/* Header with Mars Logo and Contact */}
-            <div className="flex flex-row items-center justify-between w-full max-w-xl mx-auto">
-              <img src="/logo.png" alt="Mars Logo" className="h-16 w-auto" />
-              <div className="flex flex-col items-end">
-                <span className="text-green-700 font-extrabold text-2xl ">CONTACT</span>
-                <span className="text-black text-2xl font-extrabold">{data.contact}</span>
-                <span className="text-green-700 text-xl font-bold">www.marsarcs.com</span>
+            <div className="flex flex-row items-center justify-between w-full max-w-xl mx-auto mb-4">
+              <img src="/logo.png" alt="Mars Logo" className="h-16 w-auto flex-shrink-0" />
+              <div className="flex flex-col items-end flex-shrink-0">
+                <span className="text-green-700 font-extrabold text-2xl leading-tight">CONTACT</span>
+                <span className="text-black text-2xl font-extrabold leading-tight">{data.contact}</span>
+                <span className="text-green-700 text-xl font-bold leading-tight">www.marsarcs.com</span>
               </div>
             </div>
 
             {/* Main Image + Offer Bubble */}
-            <div className="relative w-full max-w-xl mx-auto mt-6">
+            <div className="relative w-full max-w-xl mx-auto mb-6">
               <img
                 src={image || template.preview || "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=900&q=80"}
                 alt="Apartment"
-                className="rounded-lg w-full h-72 object-cover border shadow-lg"
+                className="rounded-lg w-full h-72 object-cover border shadow-lg block"
               />
-              <div className="absolute left-2 top-2">
-                <div className="bg-green-500 px-6 py-2 rounded-full shadow-lg">
-                  <span className="text-black text-2xl font-bold">{data.price || ""}</span>
-                  <span className="block text-black text-2xl -mt-2 font-semibold">Only</span>
+              <div className="absolute left-2 top-2 z-10">
+                <div className="bg-green-500 px-6 py-2 rounded-full shadow-lg text-center">
+                  <div className="text-black text-2xl font-bold leading-tight">{data.price || ""}</div>
+                  <div className="text-black text-2xl font-semibold leading-tight -mt-1">Only</div>
                 </div>
               </div>
-              <div className="absolute bottom-2 left-2 bg-white px-2 py-1 rounded shadow-md text-left">
-                <span className="block text-black font-bold">{data.title || ""}</span>
-                <span className="block text-black font-bold">{data.auctionDate || ""}</span>
+              <div className="absolute bottom-2 left-2 bg-white px-2 py-1 rounded shadow-md z-10">
+                <div className="text-black font-bold text-sm leading-tight">{data.title || ""}</div>
+                <div className="text-black font-bold text-sm leading-tight">{data.auctionDate || ""}</div>
               </div>
             </div>
 
             {/* Main Offer Text */}
-            <div className="w-full max-w-xl mx-auto mt-8 mb-6 px-6 flex flex-col items-center text-center">
-              <span className="text-green-800 text-4xl font-extrabold mb-2">{data.type || ""}</span>
-              <span className="text-black text-3xl font-extrabold mb-1">
+            <div className="w-full max-w-xl mx-auto px-6 flex flex-col items-center text-center">
+              <div className="text-green-800 text-4xl font-extrabold mb-2 leading-tight">{data.type || ""}</div>
+              <div className="text-black text-3xl font-extrabold mb-4 leading-tight">
                 @ <span className="text-black">{data.location?.split(/[,]+/)[0] || ""}</span>{' '}
                 <span className="text-gray-700 font-semibold">{data.location?.split(/[,]+/)[1] ? `(${data.location.split(/[,]+/)[1]})` : ""}</span>
-              </span>
-              <div className="flex items-center justify-center mt-2 space-x-4">
-                <div className="flex flex-col">
-                  <div className="flex flex-row items-center space-x-2 mt-2">
+              </div>
+              <div className="flex items-start justify-center space-x-6 w-full">
+                <div className="flex flex-col items-center flex-shrink-0">
+                  <div className="flex flex-row items-center justify-center">
                     {/* Parking Icon - exact as in image */}
-                    <img src="/images/parking-image.png" alt="Parking" className="w-16 h-14" />
+                    <img src="/images/parking-image.png" alt="Parking" className="w-16 h-14 object-contain" />
                   </div>
                 </div>
-                <div className="ml-6 text-left">
-                {descriptionPoints.map((point, index) => (
-                  <div key={index} className="flex items-start gap-2 text-lg text-gray-700">
-                    <span className="text-red-600 font-extrabold">•</span><span className='text-black font-semibold text-xl'>{point}</span>
-                  </div>
-                ))}
+                <div className="flex-1 text-left">
+                  {descriptionPoints.map((point, index) => (
+                    <div key={index} className="flex items-start gap-2 text-lg text-gray-700 mb-1">
+                      <span className="text-red-600 font-extrabold flex-shrink-0">•</span>
+                      <span className='text-black font-semibold text-xl leading-tight'>{point}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
