@@ -271,7 +271,7 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
 
         {/* Template 4 - Modern Real Estate Style (using flat-img.jpg as reference) */}
         {template.id === 4 && (
-          <div className="bg-white pt-0 px-4 pb-4 flex flex-col items-center w-full min-h-[600px]">
+          <div className="bg-white pt-0 px-4 pb-2 flex flex-col items-center w-full min-h-[600px]">
             {/* Header with Mars Logo and Contact */}
             <div className="flex flex-row items-center justify-between w-full max-w-xl mx-auto mb-4 pt-0">
               <img src="/logo.png" alt="Mars Logo" className="h-12 w-12 flex-shrink-0" />
@@ -283,19 +283,19 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
             </div>
 
             {/* Main Image + Offer Bubble */}
-            <div className="relative w-full max-w-xl mx-auto mb-6">
+            <div className="relative w-full max-w-xl mx-auto mb-1">
               <img
                 src={image || template.preview || "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=900&q=80"}
                 alt="Apartment"
                 className="rounded-lg w-full h-72 object-cover border shadow-lg block"
               />
               <div className="absolute left-2 top-2 z-10">
-                <div className="bg-green-500 px-6 py-2 rounded-full shadow-lg text-center">
+                <div className="bg-green-500 pt-0 px-4 pb-4 rounded-full shadow-lg text-center">
                   <div className="text-black text-xl font-bold leading-tight">{data.price || ""}</div>
                   <div className="text-black text-xl font-semibold leading-tight -mt-1">Only</div>
                 </div>
               </div>
-              <div className="absolute bottom-2 left-2 bg-white px-2 py-1 rounded shadow-md z-10">
+              <div className="absolute bottom-2 left-2 bg-white px-2 pb-3 rounded shadow-md z-10">
                 <div className="text-black font-bold text-sm leading-tight">{data.title || ""}</div>
                 <div className="text-black font-bold text-sm leading-tight">{data.auctionDate || ""}</div>
               </div>
@@ -310,7 +310,7 @@ const PosterPreview: React.FC<PosterPreviewProps> = ({ template, data, image }) 
               </div>
               <div className="flex items-start justify-center space-x-6 w-full">
                 <div className="flex flex-col items-center flex-shrink-0">
-                  <div className="flex flex-row items-center justify-center">
+                  <div className="flex flex-row items-center justify-center mt-6">
                     {/* Parking Icon - exact as in image */}
                     <img src="/images/parking-image.png" alt="Parking" className="w-12 h-10 object-contain" />
                   </div>
